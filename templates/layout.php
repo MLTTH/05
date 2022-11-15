@@ -8,8 +8,6 @@
 
    <body>
       <?= $content; ?>
-      <?= $contents; ?>
-
 
    </body>
 </html>

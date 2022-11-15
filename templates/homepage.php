@@ -4,6 +4,7 @@
 <h1>Thi-Thanh Nguyen</h1>
 <p>Derniers billets du blog :</p>
 
+<a href="/05/templates/contact.php">contact</a>
 <?php
 foreach ($posts as $post) {
 ?>
@@ -15,7 +16,7 @@ foreach ($posts as $post) {
     	<p>
         	<?= nl2br(htmlspecialchars($post['content'])); ?>
         	<br />
-        	<em><a href="post.php?id=<?= urlencode($post['postIdentifier']) ?>">Commentaires</a></em>
+        	<em><a href="index.php?action=post&?id=<?= urlencode($post['postIdentifier']) ?>">Commentaires</a></em>
     	</p>
 	</div>
 <?php
