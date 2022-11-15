@@ -32,33 +32,14 @@ function getPost($postIdentifier) {
         'title' => $row['title'],
         'french_creation_date' => $row['french_creation_date'],
         'content' => $row['content'],
+        'postIdentifier' => $row['id'],
     ];
 
     return $post;
 }
 
-function getComments($postIdentifier) {
-    $database = dbConnect();
-    $statement = $database->prepare(
-        "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
-    );
-    $statement->execute([$postIdentifier]);
-
-    $comments = [];
-    while (($row = $statement->fetch())) {
-        $comment = [
-            'author' => $row['author'],
-            'french_creation_date' => $row['french_creation_date'],
-            'comment' => $row['comment'],
-        ];
-
-        $comments[] = $comment;
-    }
-
-    return $comments;
-}
-
-function dbConnect() {
+function dbConnect()
+{
     try {
         $database = new PDO('mysql:host=localhost;dbname=05;charset=utf8', '05', 'password');
 
