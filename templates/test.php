@@ -15,12 +15,12 @@ foreach ($posts as $post) {
     	<p>
         	<?= nl2br(htmlspecialchars($post['content'])); ?>
         	<br />
-        	<em><a href="post.php?id=<?= urlencode($post['postIdentifier']) ?>">Commentaires</a></em>
+        	<em><a href="post.php?id=<?= urlencode($post['postIdentifier']) ?>">coucou</a></em>
     	</p>
 	</div>
 <?php
 }
 ?>
-<?php $content = ob_get_clean(); ?>
+<?php $contents = ob_get_clean(); ?>
 
 <?php require('layout.php') ?>
