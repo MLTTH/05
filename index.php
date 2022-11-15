@@ -4,5 +4,5 @@ require('src/model.php');
 
 $posts = getPosts();
 
-require('templates/test.php');
+require('templates/homepage.php');
 ?>
