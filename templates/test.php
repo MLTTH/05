@@ -2,13 +2,13 @@
 <html>
 	<head>
     	<meta charset="utf-8" />
-    	<title>Le blog de Thi-Thanh Nguyen</title>
+    	<title>Le blog de Thi-Thanh Tran</title>
     	<link href="style.css" rel="stylesheet" />
 	</head>
 
 	<body>
-    	<h1>Le blog de Thi-Thanh Nguyen !</h1>
-    	<p>Derniers billets du blog :</p>
+    	<h1>Thi-Thanh Tran !</h1>
+    	<p>Derniers articles du blog :</p>
 
     	<?php
     	foreach ($posts as $post) {
