@@ -1,7 +1,7 @@
 <?php
 // controllers/post.php
 
-require_once('src/model.php');
+require_once('src/model/post.php');
 
 function unefonction(string $postIdentifier)
 {

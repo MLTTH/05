@@ -3,11 +3,10 @@ h1 {
 }
 h1, h3
 {
-    text-align:center;
-}
+    text-align:center;}
 h3
 {
-    background-color:black;
+    background-color:rgb(0, 0, 0);
     color:white;
     font-size:0.9em;
     margin-bottom:0px;
@@ -26,5 +25,5 @@ h3
 a
 {
     text-decoration: none;
-    color: rgb(16, 16, 180);
+    color: rgb(180, 16, 166);
 }

@@ -3,7 +3,6 @@
 <h1>Contact Form</h1>
 
 <form>
-<form>
   <div class="form-group">
     <label for="exampleFormControlInput1">Nom</label>
     <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Votre nom">
@@ -16,9 +15,7 @@
     <label for="exampleFormControlTextarea1">Message</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Votre message ici" rows="3"></textarea>
   </div>
-</form>
   <button type="button" class="btn btn-primary">Envoyer</button>
-
 </form>
 
 <?php $content = ob_get_clean(); ?>
