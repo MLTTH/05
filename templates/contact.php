@@ -1,21 +1,25 @@
 <?php ob_start(); ?>
 
-<h3>Contact Form</h3>
+<h1>Contact Form</h1>
 
-<div class="container">
-  <form action="#">
-    <label for="fname">First Name</label>
-    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+<form>
+<form>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Nom</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Votre nom">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Votre email</label>
+    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Message</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Votre message ici" rows="3"></textarea>
+  </div>
+</form>
+  <button type="button" class="btn btn-primary">Envoyer</button>
 
-    <label for="lname">Last Name</label>
-    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-
-    <label for="subject">Subject</label>
-    <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-
-    <input type="submit" value="Submit">
-  </form>
-</div>
+</form>
 
 <?php $content = ob_get_clean(); ?>
 <?php require('layout.php') ?>

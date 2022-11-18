@@ -1,9 +1,11 @@
 <?php
-// index.php
 
 require_once('src/controllers/add_comment.php');
 require_once('src/controllers/homepageController.php');
 require_once('src/controllers/postController.php');
+require_once('src/controllers/front/contact.php');
+require_once('src/controllers/postsController.php');
+
 
 try {
 	if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -30,5 +32,7 @@ try {
     	homepage();
 	}
 } catch (Exception $e) { // S'il y a eu une erreur, alors...
-	echo 'Erreur : '.$e->getMessage();
+	$errorMessage = $e->getMessage();
+
+	require('templates/error.php');
 }

@@ -1,9 +1,9 @@
-<?php $title = "Le blog de l'AVBN"; ?>
+<?php $title = "Le blog des dev"; ?>
 
 <?php ob_start(); ?>
-<h1>Le super blog de l'AVBN !</h1>
-<p>Derniers billets du blog :</p>
-
+<h1>Le blog des dev !</h1>
+<p>Derniers articles du blog :</p>
+<img src="dev.jpg" class="img-fluid" alt="Responsive image">
 <?php
 foreach ($posts as $post) {
 ?>
