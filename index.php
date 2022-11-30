@@ -1,20 +1,17 @@
 <?php
-
+//insérer le fichier controller
 require_once('src/controllers/comment/add.php');
 require_once('src/controllers/comment/update.php');
 require_once('src/controllers/homepageController.php');
 require_once('src/controllers/postController.php');
 require_once('src/controllers/user/register.php');
 
-
+//namespace + class
 use Application\Controllers\Comment\Add\AddCommentController;
 use Application\Controllers\Comment\Update\UpdateComment;
-use Application\Controllers\Homepage\Homepage;
 use Application\Controllers\HomepageController\HomepageController;
-use Application\Controllers\Post\Post;
 use Application\Controllers\PostController\PostController;
 use Application\Controllers\User\Add\RegisterController;
-
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -48,7 +45,7 @@ try {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         } elseif ($_GET['action'] === 'register') {
-                (new RegisterController())->execute($_POST);	
+                (new RegisterController())->execute($_POST);
 		} else {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }
