@@ -1,4 +1,5 @@
 <?php $title = "Le blog des dev"; ?>
+<?php require('nav.php') ?>
 
 <?php ob_start(); ?>
 <h1>Thi-Thanh Nguyen</h1>

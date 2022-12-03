@@ -1,4 +1,5 @@
 <?php ob_start(); ?>
+<?php require('nav.php') ?>
 
 <h1>S'inscrire</h1>
 

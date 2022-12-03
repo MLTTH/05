@@ -1,5 +1,7 @@
 <?php ob_start(); ?>
 
+<?php require('nav.php') ?>
+
 <h1>Contact Form</h1>
 
 <form>

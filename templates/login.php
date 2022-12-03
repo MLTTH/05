@@ -1,4 +1,5 @@
 <?php ob_start(); ?>
+<?php require('nav.php') ?>
 
 <h1>Se connecter</h1>
 

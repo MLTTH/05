@@ -65,7 +65,6 @@ class UserRepository
             'INSERT INTO users(firstname, lastname, email, password) VALUES(?, ?, ?, ?)'
         );
         $affectedLines = $statement->execute([$firstname, $lastname, $email, $password]);
-
         return ($affectedLines > 0);
     }
 }

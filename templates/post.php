@@ -1,4 +1,5 @@
 <?php $title = "Le blog de l'AVBN"; ?>
+<?php require('nav.php') ?>
 
 <?php ob_start(); ?>
 <h1>Le super blog de l'AVBN !</h1>

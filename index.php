@@ -5,6 +5,7 @@ require_once('src/controllers/comment/update.php');
 require_once('src/controllers/homepageController.php');
 require_once('src/controllers/postController.php');
 require_once('src/controllers/user/register.php');
+require_once('src/controllers/postsController.php');
 
 //namespace + class
 use Application\Controllers\Comment\Add\AddCommentController;
@@ -12,6 +13,7 @@ use Application\Controllers\Comment\Update\UpdateComment;
 use Application\Controllers\HomepageController\HomepageController;
 use Application\Controllers\PostController\PostController;
 use Application\Controllers\User\Add\RegisterController;
+use Application\Controllers\postsController\PostsController;
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -46,7 +48,10 @@ try {
             }
         } elseif ($_GET['action'] === 'register') {
                 (new RegisterController())->execute($_POST);
-		} else {
+		} elseif ($_GET['action'] === 'posts') {
+            (new postsController())->execute();
+        } 
+        else {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }
     } else {
