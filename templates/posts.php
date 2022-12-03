@@ -17,8 +17,6 @@ foreach ($posts as $post) {
             <?= nl2br(htmlspecialchars($post->content)); ?>
             <br />
             <em><a href="index.php?action=post&id=<?= urlencode($post->postIdentifier) ?>">Commentaires</a></em>
-            <em><a href="index.php?action=register">XXXXXX</a></em>
-
         </p>
     </div>
 <?php
