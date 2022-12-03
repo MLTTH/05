@@ -1,0 +1,63 @@
+body {
+    margin: 0;
+  }
+
+* {
+    box-sizing: border-box;
+  }
+
+h1, h3
+{
+    text-align:center;
+}
+
+h1 
+{
+    font-size: 120px;
+}
+h3
+{
+    color:rgb(27, 27, 27);
+    font-size:0.9em;
+    margin-bottom:0px;
+}
+.news p
+{
+    background-color:#b4acac;
+    margin-top:0px;
+}
+
+.news
+{
+    width:70%;
+    margin:auto;
+}
+
+a
+{
+    text-decoration: none;
+    color: rgb(180, 16, 166);
+}
+
+.img-fluid {
+    width: 350px;
+
+}
+
+/* homepage */
+.homepage-info
+{
+height: 100vh;
+}
+
+.homepage-info h1
+{
+    font-size: 120px;
+}
+
+.homepage-info h3 span
+{
+    font-weight: bold;
+}
+
+
