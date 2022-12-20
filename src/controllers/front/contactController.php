@@ -11,38 +11,67 @@ class ContactController{
 
 public function execute (array $input)
 {
+    //global $erreur_envoi;
+    global $error_sent;
+    global $errors;
     $id = null;
     $lastname = null;
     $firstname = null;
     $email= null;
     $content = null;
-
+    $error_sent = false; 
+    $errors = [];
     if (empty($input['button'])) {
         require('templates/contact.php');
         return;
     }
 
-    if (!empty($input['lastname']) && !empty($input['firstname']) && !empty($input['email']) && !empty($input['content'])) {
-
-        $lastname = $input["lastname"];
-        $firstname = $input["firstname"];
-        $email= $input["email"];
-        $content = $input["content"];
-
-    } else {
-        throw new \Exception('Tous les champs doivent être complétés');
+    if (empty($input['firstname'])){
+        $errors['firstname'] = 'ce champ est obligatoire';
     }
+
+    if (empty($input['lastname'])){
+        $errors['lastname'] = 'ce champ est obligatoire';
+    }
+
+    if (empty($input['email'])){
+        $errors['email'] = 'ce champ est obligatoire';
+    }
+
+    if (empty($input['content'])){
+        $errors['content'] = 'ce champ est obligatoire';
+    }
+    
+    if (count($errors)) {
+        require('templates/contact.php');
+        return;
+    }
+
+    // if (!empty($input['lastname']) && !empty($input['firstname']) && !empty($input['email']) && !empty($input['content'])) {
+
+    //     $lastname = $input["lastname"];
+    //     $firstname = $input["firstname"];
+    //     $email= $input["email"];
+    //     $content = $input["content"];
+
+    // } else {
+    //     require('templates/contact_invalid.php');
+    //     return;
+    // }
 
 
     $contactRepository = new ContactRepository();
     $contactRepository->connection = new DatabaseConnection();
-    $success =  $contactRepository->createContact($lastname, $firstname, $email, $content);
-    if (!$success) {
-        throw new \Exception('Impossible d\'ajouter l\'utilisateur !');
-    } else {
-        header('Location: templates/contact.php');
-    }
-
-        require('templates/contact.php');
+    //$success =  $contactRepository->createContact($lastname, $firstname, $email, $content);
+    $to = $input['email'];
+    $subject = "sujet";
+    //$message = "Bonjour " . $input["firstname"] . $input["lastname"];
+    $message =  $input["firstname"] . $input["lastname"] . "vous a laissé le message suivant : " .$input["content"];
+    $success = mail($to, $subject,  $message);
+    if ($success) {
+        header('Location: index.php');
+    } 
+    $erreur_envoi = true;
+    require('templates/contact.php');
 }
 }

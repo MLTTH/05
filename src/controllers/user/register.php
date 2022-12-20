@@ -22,7 +22,7 @@ public function execute (array $input)
         return;
     }
 
-    if (!empty($input['firstname']) && !empty($input['lastname']) && !empty($input['email']) && !empty($input['password'])) {
+    if (!empty($input['firstname']) && !empty($input['lastname']) && ((!empty($input['email']) || (!filter_var($_GET['email'], FILTER_VALIDATE_EMAIL))) && !empty($input['password']))) {
         $firstname = $input["firstname"];
         $lastname = $input["lastname"];
         $email= $input["email"];
@@ -31,6 +31,7 @@ public function execute (array $input)
     } else {
         throw new \Exception('Impossible d\'ajouter l\'utilisateur !');
     }
+
 
     $userRepository = new UserRepository();
     $userRepository->connection = new DatabaseConnection();

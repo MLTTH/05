@@ -8,6 +8,7 @@ use Application\Lib\Database\DatabaseConnection;
 
 class Post
 {
+    public string $author;
     public string $title;
     public string $frenchCreationDate;
     public string $content;
@@ -53,4 +54,14 @@ class PostRepository
 
         return $posts;
     }
+
+    public function createPost(string $title, string $author, string $content): bool
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            'INSERT INTO posts( title, author, content, creation_date) VALUES(?, ?, ?, NOW())'
+        );
+        $affectedLines = $statement->execute([$title, $author, $content]);
+
+        return ($affectedLines > 0);
+    } 
 }

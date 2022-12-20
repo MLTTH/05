@@ -2,8 +2,11 @@
 <?php require('nav.php') ?>
 
 <?php ob_start(); ?>
-<h1>Le super blog de l'AVBN !</h1>
-<p><a href="index.php">Retour à la liste des billets</a></p>
+<h1>Titre</h1>
+<p><a href="index.php">Tous les articles</a></p>
+
+
+
 
 <div class="news">
     <h3>

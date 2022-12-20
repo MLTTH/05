@@ -6,6 +6,7 @@ require_once('src/controllers/homepageController.php');
 require_once('src/controllers/postController.php');
 require_once('src/controllers/user/register.php');
 require_once('src/controllers/postsController.php');
+require_once('src/controllers/addpostController.php');
 require_once('src/controllers/front/contactController.php');
 
 //namespace + class
@@ -16,6 +17,7 @@ use Application\Controllers\PostController\PostController;
 use Application\Controllers\User\Add\RegisterController;
 use Application\Controllers\postsController\PostsController;
 use Application\Controllers\Front\ContactController\ContactController;
+use Application\Controllers\AddPostController\AddPostController;
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -54,7 +56,9 @@ try {
             (new postsController())->execute();
         } elseif ($_GET['action'] === 'contact') {
                 (new ContactController())->execute($_POST);
-        } 
+        } elseif ($_GET['action'] === 'addpost') {
+            (new AddPostController())->execute($_POST);
+    }
         else {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }

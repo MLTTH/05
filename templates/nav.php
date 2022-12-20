@@ -7,7 +7,7 @@
         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="index.php?action=contact">Contact <span class="sr-only">(current)</span></a> //TODO
+        <a class="nav-link" href="index.php?action=contact">Contact <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="index.php?action=posts">Tous les articles <span class="sr-only">(current)</span></a>

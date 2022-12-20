@@ -13,7 +13,8 @@ use Application\Model\Post\PostRepository;
 class PostController
 {
     public function execute(string $postIdentifier)
-    {
+    {     
+
         $connection = new DatabaseConnection();
 
         $postRepository = new PostRepository();

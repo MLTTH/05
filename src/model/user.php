@@ -61,6 +61,15 @@ class UserRepository
 
     public function createUser(string $firstname, string $lastname, string $email, string $password): bool
     {
+        $query = $this->connection->getConnection()->prepare(
+            'SELECT * FROM users WHERE email = ?'
+        );
+        $query->execute([$email]);
+        $result = $query->rowCount();
+        if($result > 0) {
+        return false;
+        };
+
         $statement = $this->connection->getConnection()->prepare(
             'INSERT INTO users(firstname, lastname, email, password) VALUES(?, ?, ?, ?)'
         );
