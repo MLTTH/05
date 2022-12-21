@@ -58,7 +58,7 @@ try {
                 (new ContactController())->execute($_POST);
         } elseif ($_GET['action'] === 'addpost') {
             (new AddPostController())->execute($_POST);
-    }
+    } 
         else {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }

@@ -12,6 +12,10 @@
       <li class="nav-item active">
         <a class="nav-link" href="index.php?action=posts">Tous les articles <span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="index.php?action=addpost">Ajouter un article <span class="sr-only">(current)</span></a>
+      </li>
+
     </ul>
   </div>
 </nav>

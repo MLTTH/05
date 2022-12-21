@@ -29,7 +29,8 @@ public function execute (array $input)
         $password = $input["password"];
 
     } else {
-        throw new \Exception('Impossible d\'ajouter l\'utilisateur !');
+            require('templates/register.php');
+            return;
     }
 
 
@@ -37,23 +38,10 @@ public function execute (array $input)
     $userRepository->connection = new DatabaseConnection();
     $success = $userRepository->createUser($firstname, $lastname, $email, $password);
     if (!$success) {
-        throw new \Exception('Impossible d\'ajouter l\'utilisateur !');
+        require('templates/register.php');
     } else {
         header('Location: templates/login.php');
     }
-
-    
-        // Otherwise, it displays the form.
-        $userRepository = new UserRepository();
-        $userRepository->connection = new DatabaseConnection();
-        $user = $userRepository->getUser($id);
-        if ($user === null) {
-            throw new \Exception("Erreur.");
-        }
-
-        require('templates/register.php');
-
-
 
 }
 }

@@ -3,7 +3,7 @@
 
 <?php ob_start(); ?>
 <h1>Titre</h1>
-<p><a href="index.php">Tous les articles</a></p>
+<p><a href="index.php?action=posts">Tous les articles</a></p>
 
 
 

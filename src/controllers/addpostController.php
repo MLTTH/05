@@ -15,24 +15,40 @@ class AddPostController
     public function execute(array $input)
     
     {
+        global $error_sent;
+        global $errors;
+        $author = null;
         $id = null;
         $title = null;
         $content = null;
+        $error_sent = false; 
+        $errors = [];
 
-        if (empty($input['button'])) {
-            require('templates/add_post.php');
-            return;
-        }
+        // if (empty($input['button'])) {
+        //     require('templates/add_post.php');
+        //     return;
+        // }
+
+        // if (empty($input['author'])){
+        //     $errors['author'] = 'ce champ est obligatoire';
+        // }
+
+        // if (empty($input['title'])){
+        //     $errors['title'] = 'ce champ est obligatoire';
+        // }
+
+        // if (empty($input['content'])){
+        //     $errors['author'] = 'ce champ est obligatoire';
+        // }
     
-        if (!empty($input['author']) && !empty($input['title']) && !empty($input['content'])) {
-            $author = $input["author"];
-            $title = $input["title"];
-            $content= $input["content"];
-    
-        } else {
-            require('templates/add_post_invalid.php');
-            return;
-        }
+         if (!empty($input['author']) && !empty($input['title']) && !empty($input['content'])) {
+             $author = $input["author"];
+             $title = $input["title"];
+             $content= $input["content"];
+         } else {
+             require('templates/add_post_invalid.php');
+             return;
+         }
     
         $addpostRepository = new PostRepository();
         $addpostRepository->connection = new DatabaseConnection();
