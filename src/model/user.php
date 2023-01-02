@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Model\User;
+namespace App\Model\User;
 
 require_once('src/lib/database.php');
 
-use Application\Lib\Database\DatabaseConnection;
+use App\Lib\Database\DatabaseConnection;
 
 class User
 {
@@ -20,15 +20,15 @@ class UserRepository
     public DatabaseConnection $connection;
 
     public function getUser($id): ?User
-{
-    $statement = $this->connection->getConnection()->prepare(
+    {
+        $statement = $this->connection->getConnection()->prepare(
         "SELECT id, firstname, lastname, email FROM users"
- );
-    $statement->execute([$id]);
+             );
+        $statement->execute([$id]);
 
-    $row = $statement->fetch();
-    if ($row === false) {
-        return null;
+        $row = $statement->fetch();
+        if ($row === false) {
+            return null;
     }
 
     $user = new User();
@@ -38,26 +38,7 @@ class UserRepository
     $user->email = $row['email'];
 
     return $user;
-}
-
-    // public function getPosts(): array
-    // {
-    //     $statement = $this->connection->getConnection()->query(
-    //         "SELECT id, title, content, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
-    //     );
-    //     $posts = [];
-    //     while (($row = $statement->fetch())) {
-    //         $post = new Post();
-    //         $post->title = $row['title'];
-    //         $post->frenchCreationDate = $row['french_creation_date'];
-    //         $post->content = $row['content'];
-    //         $post->postIdentifier = $row['id'];
-
-    //         $posts[] = $post;
-    //     }
-
-    //     return $posts;
-    // }
+    }
 
     public function createUser(string $firstname, string $lastname, string $email, string $password): bool
     {
@@ -76,4 +57,27 @@ class UserRepository
         $affectedLines = $statement->execute([$firstname, $lastname, $email, $password]);
         return ($affectedLines > 0);
     }
+
+    public function login(string $email, string $password): bool
+    {
+           if(!empty($_POST["username"]) || empty($_POST["password"]))  
+           {  
+                $query = "SELECT * FROM users WHERE username = :username AND password = :password";  
+                $statement = $connect->prepare($query);  
+                $statement->execute(  
+                     array(  
+                          'username'     =>     $_POST["username"],  
+                          'password'     =>     $_POST["password"]  
+                     )  
+                );  
+                $count = $statement->rowCount();  
+                if($count > 0)  
+                {  
+                     $_SESSION["username"] = $_POST["username"];  
+                     header("Location: templates/login.php");  
+           }  
+      }   
+
+    }
+
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Model\Post;
+namespace App\Model\Post;
 
 require_once('src/lib/database.php');
 
-use Application\Lib\Database\DatabaseConnection;
+use App\Lib\Database\DatabaseConnection;
 
 class Post
 {
@@ -61,7 +61,6 @@ class PostRepository
             'INSERT INTO posts( title, author, content, creation_date) VALUES(?, ?, ?, NOW())'
         );
         $affectedLines = $statement->execute([$title, $author, $content]);
-
         return ($affectedLines > 0);
     } 
 }

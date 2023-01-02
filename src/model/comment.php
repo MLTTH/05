@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Model\Comment;
+namespace App\Model\Comment;
 
 require_once('src/lib/database.php');
 
-use Application\Lib\Database\DatabaseConnection;
+use App\Lib\Database\DatabaseConnection;
 
 class Comment
 {
@@ -19,6 +19,7 @@ class CommentRepository
 {
     public DatabaseConnection $connection;
 
+    //afficher les commentaires
     public function getComments(string $post): array
     {
         $statement = $this->connection->getConnection()->prepare(
@@ -52,6 +53,7 @@ class CommentRepository
         if ($row === false) {
             return null;
         }
+
 
         $comment = new Comment();
         $comment->postIdentifier = $row['id'];

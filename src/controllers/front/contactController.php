@@ -1,13 +1,14 @@
 <?php
-namespace Application\Controllers\Front\ContactController;
+namespace App\Controllers\Front\ContactController;
 
 require_once('src/lib/database.php');
 require_once('src/model/contact.php');
 
-use Application\Lib\Database\DatabaseConnection;
-use Application\Model\Contact\ContactRepository;
+use App\Lib\Database\DatabaseConnection;
+use App\Model\Contact\ContactRepository;
 
-class ContactController{
+class ContactController
+{
 
 public function execute (array $input)
 {
@@ -63,11 +64,11 @@ public function execute (array $input)
     $contactRepository = new ContactRepository();
     $contactRepository->connection = new DatabaseConnection();
     //$success =  $contactRepository->createContact($lastname, $firstname, $email, $content);
-    $to = $input['email'];
+    $from = $input['email'];
     $subject = "sujet";
     //$message = "Bonjour " . $input["firstname"] . $input["lastname"];
     $message =  $input["firstname"] . $input["lastname"] . "vous a laissé le message suivant : " .$input["content"];
-    $success = mail($to, $subject,  $message);
+    $success = mail($from, $subject,  $message);
     if ($success) {
         header('Location: index.php');
     } 

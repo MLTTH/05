@@ -27,9 +27,9 @@ foreach ($posts as $post) {
 }
 ?>
 
-<div>
+<div class="d-flex justify-content-center">
 <a href="index.php?action=addpost"> 
-    <button class="btn btn-primary" name="button" type="button">Ajouter un article</button> </a>
+    <button class="btn btn-lg btn-primary fw-bold border-white bg-dark" name="button" type="button">Ajouter un article</button> </a>
 </div>
 <?php $content = ob_get_clean(); ?>
 

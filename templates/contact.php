@@ -43,8 +43,8 @@
     <?php } ?>
   </div>
 
-  <div>
-    <input name="button" type="submit" />
+  <div class="d-flex justify-content-center">
+    <input class="btn btn-lg btn-primary fw-bold border-white bg-dark" name="button" type="submit" />
   </div>
 </form>
 

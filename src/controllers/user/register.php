@@ -1,17 +1,17 @@
 <?php
-namespace Application\Controllers\User\Add;
+namespace App\Controllers\User;
 
 require_once('src/lib/database.php');
 require_once('src/model/user.php');
 
-use Application\Lib\Database\DatabaseConnection;
-use Application\Model\User\UserRepository;
+use App\Lib\Database\DatabaseConnection;
+use App\Model\User\UserRepository;
 
 class RegisterController{
 
 public function execute (array $input)
 {
-    $id = null;
+
     $firstname = null;
     $lastname = null;
     $email= null;
@@ -40,7 +40,7 @@ public function execute (array $input)
     if (!$success) {
         require('templates/register.php');
     } else {
-        header('Location: templates/login.php');
+        header('Location: index.php?action=login');
     }
 
 }

@@ -24,7 +24,7 @@
           </div>
 
           <!-- Submit button -->
-          <input type="submit" class="btn btn-primary btn-lg" value="Valider"/>
+          <input type="submit" class="btn btn-lg btn-primary fw-bold border-white bg-dark" value="Valider"/>
         </form>
       </div>
     </div>

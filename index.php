@@ -1,23 +1,25 @@
 <?php
-//insérer le fichier controller
+//controller file
 require_once('src/controllers/comment/add.php');
 require_once('src/controllers/comment/update.php');
 require_once('src/controllers/homepageController.php');
 require_once('src/controllers/postController.php');
 require_once('src/controllers/user/register.php');
+require_once('src/controllers/user/login.php');
 require_once('src/controllers/postsController.php');
 require_once('src/controllers/addpostController.php');
 require_once('src/controllers/front/contactController.php');
 
 //namespace + class
-use Application\Controllers\Comment\Add\AddCommentController;
-use Application\Controllers\Comment\Update\UpdateComment;
-use Application\Controllers\HomepageController\HomepageController;
-use Application\Controllers\PostController\PostController;
-use Application\Controllers\User\Add\RegisterController;
-use Application\Controllers\postsController\PostsController;
-use Application\Controllers\Front\ContactController\ContactController;
-use Application\Controllers\AddPostController\AddPostController;
+use App\Controllers\Comment\AddCommentController;
+use App\Controllers\Comment\UpdateComment;
+use App\Controllers\HomepageController\HomepageController;
+use App\Controllers\PostController\PostController;
+use App\Controllers\User\RegisterController;
+use App\Controllers\User\LoginController;
+use App\Controllers\postsController\PostsController;
+use App\Controllers\Front\ContactController\ContactController;
+use App\Controllers\AddPostController\AddPostController;
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -52,7 +54,9 @@ try {
             }
         } elseif ($_GET['action'] === 'register') {
                 (new RegisterController())->execute($_POST);
-		} elseif ($_GET['action'] === 'posts') {
+		}  elseif ($_GET['action'] === 'login') {
+            (new LoginController())->execute($_POST);
+        } elseif ($_GET['action'] === 'posts') {
             (new postsController())->execute();
         } elseif ($_GET['action'] === 'contact') {
                 (new ContactController())->execute($_POST);

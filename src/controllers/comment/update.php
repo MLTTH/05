@@ -1,12 +1,12 @@
 <?php
 
-namespace Application\Controllers\Comment\Update;
+namespace App\Controllers\Comment;
 
 require_once('src/lib/database.php');
 require_once('src/model/comment.php');
 
-use Application\Lib\Database\DatabaseConnection;
-use Application\Model\Comment\CommentRepository;
+use App\Lib\Database\DatabaseConnection;
+use App\Model\Comment\CommentRepository;
 
 class UpdateComment
 {
@@ -27,9 +27,12 @@ class UpdateComment
             $commentRepository->connection = new DatabaseConnection();
             $success = $commentRepository->updateComment($postIdentifier, $author, $comment);
             if (!$success) {
-                throw new \Exception('Impossible de modifier le commentaire !');
-            } else {
                 header('Location: index.php?action=updateComment&id=' . $postIdentifier);
+                die;
+            } else {
+                header('Location: index.php?action=post&id=' .  $post);
+                die;
+                //header('Location: index.php?action=updateComment&id=' . $postIdentifier);
             }
         }
 
