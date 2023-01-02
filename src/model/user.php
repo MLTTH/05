@@ -44,18 +44,16 @@ class UserRepository
     public function createUser(string $firstname, string $lastname, string $email, string $password): bool
     {
         $query = $this->connection->getConnection()->prepare( "SELECT * FROM `users` WHERE `email` = ?" );
-        //$query->bindValue( 1, $email );
         $query->execute([$email]);
         $found = $query->fetch();
-        if($found > 0) {
+        if($found < 1) {
+            $statement = $this->connection->getConnection()->prepare(
+            'INSERT INTO users(firstname, lastname, email, password) VALUES(?, ?, ?, ?)'
+            );
+            $affectedLines = $statement->execute([$firstname, $lastname, $email, $password]);
+            return ($affectedLines > 0);
+    } else {
         return false;
-    }
-else {
-    $statement = $this->connection->getConnection()->prepare(
-        'INSERT INTO users(firstname, lastname, email, password) VALUES(?, ?, ?, ?)'
-    );
-    $affectedLines = $statement->execute([$firstname, $lastname, $email, $password]);
-    return ($affectedLines > 0);
 }
     }
 }

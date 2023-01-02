@@ -71,7 +71,7 @@ public function execute (array $input)
     if ($success) {
         header('Location: index.php');
     } 
-    $erreur_envoi = true;
+    $error_sent = true;
     require('templates/contact.php');
 }
 }

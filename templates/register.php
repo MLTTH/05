@@ -4,7 +4,7 @@
 <h1>S'inscrire</h1>
 
 <?php if ($error_sent){ ?>
-  <p class="erreur">REGISTEEEEER Le message n'a pu être envoyé. Une erreur s'est produite.</p>
+  <p class="error">Le message n'a pu être envoyé. Une erreur s'est produite.</p>
 <?php } ?>
 
 <section class="navbar navbar-dark bg-dark vh-100">
@@ -24,7 +24,7 @@
                       <input name="firstname" type="text" id="form3Example1c" class="form-control" />
                       <label class="form-label" for="form3Example1c">Nom</label>
                         <?php if (isset($errors['firstname'])){ ?>
-                        <div class="erreur"><?php echo $errors['firstname']; ?></div>
+                        <div class="error"><?php echo $errors['firstname']; ?></div>
                         <?php } ?>
                     </div>
                   </div>
@@ -35,7 +35,7 @@
                       <input name="lastname" type="text" id="form3Example1c" class="form-control" />
                       <label class="form-label" for="form3Example1c">Prénom</label>
                       <?php if (isset($errors['lastname'])){ ?>
-                        <div class="erreur"><?php echo $errors['lastname']; ?></div>
+                        <div class="error"><?php echo $errors['lastname']; ?></div>
                         <?php } ?>
                     </div>
                   </div>
@@ -45,7 +45,7 @@
                       <input name="email" type="email" id="form3Example3c" class="form-control" />
                       <label class="form-label" for="form3Example3c">Email</label>
                       <?php if (isset($errors['email'])){ ?>
-                        <div class="erreur"><?php echo $errors['email']; ?></div>
+                        <div class="error"><?php echo $errors['email']; ?></div>
                         <?php } ?>
                     </div>
                   </div>
@@ -55,7 +55,7 @@
                       <input name="password" type="password" id="form3Example4c" class="form-control" />
                       <label class="form-label" for="form3Example4c">Mot de passe</label>
                       <?php if (isset($errors['password'])){ ?>
-                        <div class="erreur"><?php echo $errors['password']; ?></div>
+                        <div class="error"><?php echo $errors['password']; ?></div>
                         <?php } ?>
                     </div>
                   </div>

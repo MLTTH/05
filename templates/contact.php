@@ -6,7 +6,7 @@
 
 <div class="container">
 <?php if ($error_sent){ ?>
-  <p class="erreur">Le message n'a pu être envoyé. Une erreur s'est produite.</p>
+  <p class="error">Le message n'a pu être envoyé. Une erreur s'est produite.</p>
 <?php } ?>
 
 <form action="index.php?action=contact" method="post">
@@ -14,7 +14,7 @@
     <label for="exampleFormControlInput1">Prénom</label>
     <input name="firstname" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Votre prénom" >
       <?php if (isset($errors['firstname'])){ ?>
-      <div class="erreur"><?php echo $errors['firstname']; ?></div>
+      <div class="error"><?php echo $errors['firstname']; ?></div>
       <?php } ?>
     
   </div>
@@ -23,7 +23,7 @@
     <label for="exampleFormControlInput1">Nom</label>
     <input name="lastname" type="text" class="form-control" id="exampleFormControlInput1" placeholder="Votre nom">
     <?php if (isset($errors['lastname'])){ ?>
-    <div class="erreur"><?php echo $errors['lastname']; ?></div>
+    <div class="error"><?php echo $errors['lastname']; ?></div>
     <?php } ?>
   </div>
 
@@ -31,7 +31,7 @@
     <label for="exampleFormControlInput1">Votre email</label>
     <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" >
     <?php if (isset($errors['email'])){ ?>
-    <div class="erreur"><?php echo $errors['email']; ?></div>
+    <div class="error"><?php echo $errors['email']; ?></div>
     <?php } ?>
   </div>
 
@@ -39,7 +39,7 @@
     <label for="exampleFormControlTextarea1">Message</label>
     <textarea name="content" type="textarea" class="form-control" id="exampleFormControlTextarea1" placeholder="Votre message ici" rows="3"></textarea>
     <?php if (isset($errors['content'])){ ?>
-    <div class="erreur"><?php echo $errors['content']; ?></div>
+    <div class="error"><?php echo $errors['content']; ?></div>
     <?php } ?>
   </div>
 

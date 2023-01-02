@@ -8,7 +8,7 @@
 <h1>Ajouter un article</h1>
 <div class="container">
 <?php if ($error_sent){ ?>
-  <p class="erreur">Le message n'a pu être envoyé. Une erreur s'est produite.</p>
+  <p class="error">L'enregistrement n'a pu aboutir. Une erreur s'est produite. Veuillez réessayer.</p>
 <?php } ?>
 
 
@@ -18,12 +18,12 @@
          <label for="author">Auteur</label><br />
          <input class="form-control" type="text" id="author" name="author"/>
          <?php if (isset($errors['author'])){ ?>
-      <div class="erreur"><?php echo $errors['author']; ?></div>
+      <div class="error"><?php echo $errors['author']; ?></div>
          <?php } ?>
          <label for="title">Titre</label><br />
          <input class="form-control" type="text" id="title" name="title"/>
          <?php if (isset($errors['title'])){ ?>
-      <div class="erreur"><?php echo $errors['title']; ?></div>
+      <div class="error"><?php echo $errors['title']; ?></div>
          <?php } ?>
       </div>
 
@@ -31,7 +31,7 @@
       <label for="content">Texte</label><br />
       <textarea class="form-control" id="content" name="content"></textarea>
       <?php if (isset($errors['content'])){ ?>
-      <div class="erreur"><?php echo $errors['content']; ?></div>
+      <div class="error"><?php echo $errors['content']; ?></div>
          <?php } ?>
    </div>
 
