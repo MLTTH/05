@@ -12,7 +12,6 @@ class ContactController
 
 public function execute (array $input)
 {
-    //global $erreur_envoi;
     global $error_sent;
     global $errors;
     $id = null;

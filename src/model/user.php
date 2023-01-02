@@ -58,26 +58,26 @@ class UserRepository
         return ($affectedLines > 0);
     }
 
-    public function login(string $email, string $password): bool
-    {
-           if(!empty($_POST["username"]) || empty($_POST["password"]))  
-           {  
-                $query = "SELECT * FROM users WHERE username = :username AND password = :password";  
-                $statement = $connect->prepare($query);  
-                $statement->execute(  
-                     array(  
-                          'username'     =>     $_POST["username"],  
-                          'password'     =>     $_POST["password"]  
-                     )  
-                );  
-                $count = $statement->rowCount();  
-                if($count > 0)  
-                {  
-                     $_SESSION["username"] = $_POST["username"];  
-                     header("Location: templates/login.php");  
-           }  
-      }   
+    // public function login(string $email, string $password): bool
+    // {
+    //        if(!empty($_POST["username"]) || empty($_POST["password"]))  
+    //        {  
+    //             $query = "SELECT * FROM users WHERE username = :username AND password = :password";  
+    //             $statement = $connect->prepare($query);  
+    //             $statement->execute(  
+    //                  array(  
+    //                       'username'     =>     $_POST["username"],  
+    //                       'password'     =>     $_POST["password"]  
+    //                  )  
+    //             );  
+    //             $count = $statement->rowCount();  
+    //             if($count > 0)  
+    //             {  
+    //                  $_SESSION["username"] = $_POST["username"];  
+    //                  header("Location: templates/login.php");  
+    //        }  
+    //   }   
 
-    }
+    // }
 
 }

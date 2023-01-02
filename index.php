@@ -53,7 +53,7 @@ try {
                 throw new Exception('Aucun identifiant de commentaire envoyé');
             }
         } elseif ($_GET['action'] === 'register') {
-                (new RegisterController())->execute($_POST);
+            (new RegisterController())->execute($_POST);
 		}  elseif ($_GET['action'] === 'login') {
             (new LoginController())->execute($_POST);
         } elseif ($_GET['action'] === 'posts') {

@@ -75,7 +75,7 @@ a
     border: red 2px solid;
 }
 
-.container .erreur {
+.erreur {
     color: red;
     font-size: x-small;
 }
