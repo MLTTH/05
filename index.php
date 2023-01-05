@@ -15,8 +15,8 @@ use App\Controllers\Comment\AddCommentController;
 use App\Controllers\Comment\UpdateComment;
 use App\Controllers\HomepageController\HomepageController;
 use App\Controllers\PostController\PostController;
-use App\Controllers\User\RegisterController;
 use App\Controllers\User\LoginController;
+use App\Controllers\User\RegisterController;
 use App\Controllers\postsController\PostsController;
 use App\Controllers\Front\ContactController\ContactController;
 use App\Controllers\AddPostController\AddPostController;
@@ -55,6 +55,7 @@ try {
         } elseif ($_GET['action'] === 'register') {
             (new RegisterController())->execute($_POST);
 		}  elseif ($_GET['action'] === 'login') {
+            //var_dump($_POST); die();
             (new LoginController())->execute($_POST);
         } elseif ($_GET['action'] === 'posts') {
             (new postsController())->execute();

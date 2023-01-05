@@ -29,7 +29,7 @@
 
   <div class="form-group">
     <label for="exampleFormControlInput1">Votre email</label>
-    <input name="email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" >
+    <input name="email" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" >
     <?php if (isset($errors['email'])){ ?>
     <div class="error"><?php echo $errors['email']; ?></div>
     <?php } ?>

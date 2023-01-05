@@ -42,7 +42,7 @@
 
                   <div class="d-flex flex-row align-items-center mb-4">
                     <div class="form-outline flex-fill mb-0">
-                      <input name="email" type="email" id="form3Example3c" class="form-control" />
+                      <input name="email" type="text" id="form3Example3c" class="form-control" />
                       <label class="form-label" for="form3Example3c">Email</label>
                       <?php if (isset($errors['email'])){ ?>
                         <div class="error"><?php echo $errors['email']; ?></div>

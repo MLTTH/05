@@ -15,6 +15,8 @@ class RegisterController{
         global $errors; 
         $error_sent = false; 
         $errors = [];
+        $userRepository = new UserRepository();
+        $userRepository->connection = new DatabaseConnection();
         
     if (empty($input['button'])) {
         require('templates/register.php');
@@ -27,24 +29,30 @@ class RegisterController{
         if (empty($input['lastname'])){
         $errors['lastname'] = 'ce champ est obligatoire';
     }
-        if (!empty($input['email'])){
         $input['email'] = filter_var($input['email'], FILTER_VALIDATE_EMAIL);
+        if (!empty($input['email'])){
+        $userexistant = $userRepository->getUserbyEmail($input['email']);
+        if  ($userexistant){
+          $errors['email'] = 'email déjà utilisé';
+        }
     } else {
         $errors['email'] = 'ce champ est obligatoire';
     }
-        if (!empty($input['password'])){
+        if ((!empty($input['password'])) && (strlen($input['password']) >= 8)) {
         $input['password'] = password_hash($input['password'], PASSWORD_DEFAULT);
-    } else {
+    } else if (empty($input['password'])) {
         $errors['password'] = 'ce champ est obligatoire';
-    }
-        if (count($errors)) {
+    } else if ((!empty($input['password'])) && (strlen($input['password']) < 8) && 
+        (!preg_match("/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/", $input['password']))) {
+          $errors['password'] = 'Le mot de passe doit contenir au moins une majuscule, un chiffre et un caractère spécial';
+    } if (count($errors)) {
         require('templates/register.php');
         return;
     }
 
 
-    $userRepository = new UserRepository();
-    $userRepository->connection = new DatabaseConnection();
+
+
     $success = $userRepository->createUser($input['firstname'], $input['lastname'], $input['email'], $input['password']);
     if (!$success) {
         require('templates/register.php');

@@ -12,16 +12,49 @@ class UpdateComment
 {
     public function execute(string $postIdentifier, ?array $input)
     {
-        // It handles the form submission when there is an input.
-        if ($input !== null) {
-            $author = null;
-            $comment = null;
-            if (!empty($input['author']) && !empty($input['comment'])) {
-                $author = $input['author'];
-                $comment = $input['comment'];
-            } else {
-                throw new \Exception('Les données du formulaire sont invalides.');
+        // global $error_sent;
+        // global $errors; 
+        // $error_sent = false; 
+        // $errors = [];
+
+        // if (empty($input['button'])) {
+        //     require('templates/update_comment.php');
+        //     return;
+        // } 
+         if (empty($input['author'])){
+             $errors['author'] = 'ce champ est obligatoire';
+         }  if (empty($input['comment'])){
+             $errors['comment'] = 'ce champ est obligatoire';
+         }
+         if (count($errors)) {
+             require('templates/update_comment.php');
+             return;
+          if ($input !== null) {
+              $author = null;
+              $comment = null;
+              if (!empty($input['author']) && !empty($input['comment'])) {
+                  $author = $input['author'];
+                  $comment = $input['comment'];
+              } else {
+                  throw new \Exception('Les données du formulaire sont invalides.');
+              }
             }
+
+        // if ($input !== null) {
+        //     $author = null;
+        //     $comment = null;
+        //     if (!empty($input['author']) && !empty($input['comment'])) {
+        //         $author = $input['author'];
+        //         $comment = $input['comment'];
+        //     } else if (empty($input['author'])) {
+        //             $errors['author'] = 'ce champ est obligatoire';
+        //     } else if (empty($input['comment'])) {
+        //             $errors['comment'] = 'ce champ est obligatoire';
+        //     } if (count($errors)) {
+        //         require('templates/update_comment.php');
+        //         return;
+        //     }
+
 
             $commentRepository = new CommentRepository();
             $commentRepository->connection = new DatabaseConnection();
@@ -34,14 +67,6 @@ class UpdateComment
                 die;
                 //header('Location: index.php?action=updateComment&id=' . $postIdentifier);
             }
-        }
-
-        // Otherwise, it displays the form.
-        $commentRepository = new CommentRepository();
-        $commentRepository->connection = new DatabaseConnection();
-        $comment = $commentRepository->getComment($postIdentifier);
-        if ($comment === null) {
-            throw new \Exception("Le commentaire $postIdentifier n'existe pas.");
         }
 
         require('templates/update_comment.php');

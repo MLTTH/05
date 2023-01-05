@@ -14,14 +14,9 @@ public function execute (array $input)
 {
     global $error_sent;
     global $errors;
-    $id = null;
-    $lastname = null;
-    $firstname = null;
-    $email= null;
-    $content = null;
     $error_sent = false; 
     $errors = [];
-    if (empty($input['button'])) {
+    if (!isset($input['button'])) {
         require('templates/contact.php');
         return;
     }
@@ -46,18 +41,6 @@ public function execute (array $input)
         require('templates/contact.php');
         return;
     }
-
-    // if (!empty($input['lastname']) && !empty($input['firstname']) && !empty($input['email']) && !empty($input['content'])) {
-
-    //     $lastname = $input["lastname"];
-    //     $firstname = $input["firstname"];
-    //     $email= $input["email"];
-    //     $content = $input["content"];
-
-    // } else {
-    //     require('templates/contact_invalid.php');
-    //     return;
-    // }
 
 
     $contactRepository = new ContactRepository();

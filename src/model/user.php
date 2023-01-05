@@ -19,12 +19,12 @@ class UserRepository
 {
     public DatabaseConnection $connection;
 
-    public function getUser($id): ?User
+    public function getUserbyEmail($email): ?User
     {
         $statement = $this->connection->getConnection()->prepare(
-        "SELECT id, firstname, lastname, email FROM users"
+        "SELECT id, firstname, lastname, email, password FROM users WHERE email=?"
              );
-        $statement->execute([$id]);
+        $statement->execute([$email]);
 
         $row = $statement->fetch();
         if ($row === false) {
@@ -52,8 +52,26 @@ class UserRepository
             );
             $affectedLines = $statement->execute([$firstname, $lastname, $email, $password]);
             return ($affectedLines > 0);
-    } else {
+    } else 
+        {
         return false;
-}
+        }
     }
+
+//     public function login(string $email, string $password) 
+// {
+//     $query = $this->connection->getConnection()->prepare( "SELECT * FROM users WHERE email = :email AND password = :password" );
+//     $query->execute([$email, $password]);
+//     // $count = $query->rowCount();  
+//     // if($count > 0)  
+// //    {  
+// //         $_SESSION["email"] = [$email];  
+// //         header("location:index.php?action=resgister");  
+// //    }  
+// //    else  
+// //    {  
+// //     header("location:index.php?action=login");
+// //    }
+// return;
+// }
 }
