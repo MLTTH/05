@@ -14,6 +14,9 @@ foreach ($posts as $post) {
         <h5 class="display-5">
             <?= htmlspecialchars($post->title); ?><br>
         </h5>
+        <h6 class="display-6">
+            <?= htmlspecialchars($post->subtitle); ?><br>
+        </h6>
         <p class="card-text">publié le <?= $post->frenchCreationDate; ?> par <?= $post->author; ?></p>
         <div class="text-white font-weight-bold">
             <em><a href="index.php?action=post&id=<?= urlencode($post->postIdentifier) ?>">Lire l'article</a></em>

@@ -61,7 +61,6 @@ class LoginController{
     if (count($errors)) {
         $error_sent = true;
         require('templates/login.php');
-        return;
     }
 }
 }
@@ -76,4 +75,4 @@ class LoginController{
     // pass ok => user en session
     // pass pas ok => erreur sur formulaire
 
-    // else => logout => fin session
+    // else => logout => fin session    

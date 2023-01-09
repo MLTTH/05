@@ -3,6 +3,7 @@
 
 <?php ob_start(); ?>
 <h1><?= htmlspecialchars($post->title) ?></h1>
+<h3><?= htmlspecialchars($post->subtitle) ?></h3>
 
 
 

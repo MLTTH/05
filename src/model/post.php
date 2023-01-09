@@ -22,13 +22,14 @@ class PostRepository
     public function getPost(string $postIdentifier): Post
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, title, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date FROM posts WHERE id = ?"
+            "SELECT id, title, subtitle, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date FROM posts WHERE id = ?"
         );
         $statement->execute([$postIdentifier]);
 
         $row = $statement->fetch();
         $post = new Post();
         $post->title = $row['title'];
+        $post->subtitle = $row['subtitle'];
         $post->frenchCreationDate = $row['french_creation_date'];
         $post->content = $row['content'];
         $post->postIdentifier = $row['id'];
@@ -40,12 +41,13 @@ class PostRepository
     public function getPosts(): array
     {
         $statement = $this->connection->getConnection()->query(
-            "SELECT id, title, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
+            "SELECT id, title, subtitle, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
         );
         $posts = [];
         while (($row = $statement->fetch())) {
             $post = new Post();
             $post->title = $row['title'];
+            $post->subtitle = $row['subtitle'];
             $post->frenchCreationDate = $row['french_creation_date'];
             $post->content = $row['content'];
             $post->postIdentifier = $row['id'];
@@ -57,12 +59,12 @@ class PostRepository
         return $posts;
     }
 
-    public function createPost(string $title, string $author, string $content): bool
+    public function createPost(string $title, string $subtitle, string $author, string $content): bool
     {
         $statement = $this->connection->getConnection()->prepare(
-            'INSERT INTO posts( title, author, content, creation_date) VALUES(?, ?, ?, NOW())'
+            'INSERT INTO posts( title, subtitle, author, content, creation_date) VALUES( ?, ?, ?, ?, NOW())'
         );
-        $affectedLines = $statement->execute([$title, $author, $content]);
+        $affectedLines = $statement->execute([$title, $subtitle, $author, $content]);
         return ($affectedLines > 0);
     } 
 }

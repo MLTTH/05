@@ -29,6 +29,10 @@ class AddPostController
         if (empty($input['title'])){
             $errors['title'] = 'ce champ est obligatoire';
         }
+
+        if (empty($input['subtitle'])){
+            $errors['subtitle'] = 'ce champ est obligatoire';
+        }
     
         if (empty($input['author'])){
             $errors['author'] = 'ce champ est obligatoire';
@@ -52,7 +56,7 @@ class AddPostController
     
         $addpostRepository = new PostRepository();
         $addpostRepository->connection = new DatabaseConnection();
-        $success = $addpostRepository->createPost($input['title'], $input['author'], $input['content']);
+        $success = $addpostRepository->createPost($input['title'], $input['subtitle'], $input['author'], $input['content']);
         if (!$success) {
             header('Location: index.php?action=addpost');
         } else {

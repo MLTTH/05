@@ -22,10 +22,18 @@ Une erreur s'est produite. Veuillez réessayer.
          <?php if (isset($errors['author'])){ ?>
          <div class="error"><?php echo $errors['author']; ?></div>
          <?php } ?>
+
          <label for="title">Titre</label><br />
          <input class="form-control" type="text" id="title" name="title" placeholder="Entrez un titre"/>
          <?php if (isset($errors['title'])){ ?>
-      <div class="error"><?php echo $errors['title']; ?></div>
+         <div class="error"><?php echo $errors['title']; ?></div>
+         <?php } ?>
+
+                  
+         <label for="subtitle">Chapô</label><br />
+         <input class="form-control" type="text" id="subtitle" name="subtitle" placeholder="Entrez un sous titre"/>
+         <?php if (isset($errors['subtitle'])){ ?>
+         <div class="error"><?php echo $errors['subtitle']; ?></div>
          <?php } ?>
       </div>
 
