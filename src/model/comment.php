@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Model\Comment;
+namespace App\Model\Comment;
 
 require_once('src/lib/database.php');
 
-use Application\Lib\Database\DatabaseConnection;
+use App\Lib\Database\DatabaseConnection;
 
 class Comment
 {
@@ -19,10 +19,11 @@ class CommentRepository
 {
     public DatabaseConnection $connection;
 
+    //afficher les commentaires
     public function getComments(string $post): array
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date, post_id FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
+            "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y') AS french_creation_date, post_id FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
         );
         $statement->execute([$post]);
 
@@ -44,7 +45,7 @@ class CommentRepository
     public function getComment(string $postIdentifier): ?Comment
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date, post_id FROM comments WHERE id = ?"
+            "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y') AS french_creation_date, post_id FROM comments WHERE id = ?"
         );
         $statement->execute([$postIdentifier]);
 
@@ -52,6 +53,7 @@ class CommentRepository
         if ($row === false) {
             return null;
         }
+
 
         $comment = new Comment();
         $comment->postIdentifier = $row['id'];

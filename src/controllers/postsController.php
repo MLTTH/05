@@ -1,12 +1,12 @@
 <?php
 
-namespace Application\Controllers\PostsController;
+namespace App\Controllers\PostsController;
 
 require_once('src/lib/database.php');
 require_once('src/model/post.php');
 
-use Application\Lib\Database\DatabaseConnection;
-use Application\Model\Post\PostRepository;
+use App\Lib\Database\DatabaseConnection;
+use App\Model\Post\PostRepository;
 
 class PostsController
 {

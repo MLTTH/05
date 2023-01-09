@@ -1,13 +1,14 @@
 <?php
 
-namespace Application\Model\Post;
+namespace App\Model\Post;
 
 require_once('src/lib/database.php');
 
-use Application\Lib\Database\DatabaseConnection;
+use App\Lib\Database\DatabaseConnection;
 
 class Post
 {
+    public string $author;
     public string $title;
     public string $frenchCreationDate;
     public string $content;
@@ -21,7 +22,7 @@ class PostRepository
     public function getPost(string $postIdentifier): Post
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, title, content, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts WHERE id = ?"
+            "SELECT id, title, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date FROM posts WHERE id = ?"
         );
         $statement->execute([$postIdentifier]);
 
@@ -31,6 +32,7 @@ class PostRepository
         $post->frenchCreationDate = $row['french_creation_date'];
         $post->content = $row['content'];
         $post->postIdentifier = $row['id'];
+        $post->author = $row['author'];
 
         return $post;
     }
@@ -38,7 +40,7 @@ class PostRepository
     public function getPosts(): array
     {
         $statement = $this->connection->getConnection()->query(
-            "SELECT id, title, content, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
+            "SELECT id, title, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
         );
         $posts = [];
         while (($row = $statement->fetch())) {
@@ -47,10 +49,20 @@ class PostRepository
             $post->frenchCreationDate = $row['french_creation_date'];
             $post->content = $row['content'];
             $post->postIdentifier = $row['id'];
+            $post->author = $row['author'];
 
             $posts[] = $post;
         }
 
         return $posts;
     }
+
+    public function createPost(string $title, string $author, string $content): bool
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            'INSERT INTO posts( title, author, content, creation_date) VALUES(?, ?, ?, NOW())'
+        );
+        $affectedLines = $statement->execute([$title, $author, $content]);
+        return ($affectedLines > 0);
+    } 
 }

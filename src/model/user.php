@@ -1,10 +1,10 @@
 <?php
 
-namespace Application\Model\User;
+namespace App\Model\User;
 
 require_once('src/lib/database.php');
 
-use Application\Lib\Database\DatabaseConnection;
+use App\Lib\Database\DatabaseConnection;
 
 class User
 {
@@ -18,17 +18,35 @@ class User
 class UserRepository
 {
     public DatabaseConnection $connection;
+    public function checkPassword(string $email, string $password) {
+        $query = $this->connection->getConnection()->prepare( "SELECT * FROM users WHERE email = :email AND password = :password" );
+        $query->execute(
+            array(  
+            'email'     =>     $email,  
+            'password'  =>     $password  
+        )
+        );
+        $count = $query->rowCount();
+        if($count > 0) {
+           //return true;
+           
+            $_SESSION["email"] = $email;
+            $_SESSION['password'] = $password;  
+            return true;
+        }
 
-    public function getUser($id): ?User
-{
-    $statement = $this->connection->getConnection()->prepare(
-        "SELECT id, firstname, lastname, email FROM users"
- );
-    $statement->execute([$id]);
+    }
 
-    $row = $statement->fetch();
-    if ($row === false) {
-        return null;
+    public function getUserbyEmail($email): ?User
+    {
+        $statement = $this->connection->getConnection()->prepare(
+        "SELECT id, firstname, lastname, email, password FROM users WHERE email=?"
+             );
+        $statement->execute([$email]);
+
+        $row = $statement->fetch();
+        if ($row === false) {
+            return null;
     }
 
     $user = new User();
@@ -36,35 +54,25 @@ class UserRepository
     $user->firstname = $row['firstname'];
     $user->lastname = $row['lastname'];
     $user->email = $row['email'];
+    $user->password = $row['password'];
 
     return $user;
-}
-
-    // public function getPosts(): array
-    // {
-    //     $statement = $this->connection->getConnection()->query(
-    //         "SELECT id, title, content, DATE_FORMAT(creation_date, '%d/%m/%Y à %Hh%imin%ss') AS french_creation_date FROM posts ORDER BY creation_date DESC LIMIT 0, 5"
-    //     );
-    //     $posts = [];
-    //     while (($row = $statement->fetch())) {
-    //         $post = new Post();
-    //         $post->title = $row['title'];
-    //         $post->frenchCreationDate = $row['french_creation_date'];
-    //         $post->content = $row['content'];
-    //         $post->postIdentifier = $row['id'];
-
-    //         $posts[] = $post;
-    //     }
-
-    //     return $posts;
-    // }
+    }
 
     public function createUser(string $firstname, string $lastname, string $email, string $password): bool
     {
-        $statement = $this->connection->getConnection()->prepare(
+        $query = $this->connection->getConnection()->prepare( "SELECT * FROM `users` WHERE `email` = ?" );
+        $query->execute([$email]);
+        $found = $query->fetch();
+        if($found < 1) {
+            $statement = $this->connection->getConnection()->prepare(
             'INSERT INTO users(firstname, lastname, email, password) VALUES(?, ?, ?, ?)'
-        );
-        $affectedLines = $statement->execute([$firstname, $lastname, $email, $password]);
-        return ($affectedLines > 0);
+            );
+            $affectedLines = $statement->execute([$firstname, $lastname, $email, $password]);
+            return ($affectedLines > 0);
+    } else 
+        {
+        return false;
+        }
     }
 }

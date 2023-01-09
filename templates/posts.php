@@ -3,25 +3,33 @@
 <?php ob_start(); ?>
 <?php require('nav.php') ?>
 
-<p>Derniers articles du blog :</p>
+<h1>Articles</h1>
 
 <?php
 foreach ($posts as $post) {
 ?>
-    <div class="news">
-        <h3>
-            <?= htmlspecialchars($post->title); ?>
-            <em>le <?= $post->frenchCreationDate; ?></em>
-        </h3>
-        <p>
-            <?= nl2br(htmlspecialchars($post->content)); ?>
-            <br />
-            <em><a href="index.php?action=post&id=<?= urlencode($post->postIdentifier) ?>">Commentaires</a></em>
-        </p>
+
+<div class="container">
+    <div class="jumbotron mb-1 py-2">
+        <h5 class="display-5">
+            <?= htmlspecialchars($post->title); ?><br>
+        </h5>
+        <p class="card-text">publié le <?= $post->frenchCreationDate; ?> par <?= $post->author; ?></p>
+        <div class="text-white font-weight-bold">
+            <em><a href="index.php?action=post&id=<?= urlencode($post->postIdentifier) ?>">Lire l'article</a></em>
+        </div>
+    </div>
     </div>
 <?php
 }
 ?>
+
+<div class="d-flex justify-content-center">
+<a href="index.php?action=addpost"> 
+    <button class="btn btn-lg btn-primary fw-bold border-white bg-dark" name="button" type="button">Ajouter un article</button> </a>
+</div>
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('layout.php') ?>
+<?php require('footer.php') ?>
