@@ -32,8 +32,9 @@ public function execute (array $input)
         $errors['lastname'] = 'ce champ est obligatoire';
     }
 
-    if (empty($input['email'])){
-        $errors['email'] = 'ce champ est obligatoire';
+$input['email'] = filter_var($input['email'], FILTER_VALIDATE_EMAIL);
+    if (!$input['email']) {
+        $errors['email'] = 'ce champ est obligatoire, merci de renseigner un email valide';
     }
 
     if (empty($input['content'])){
@@ -44,7 +45,7 @@ public function execute (array $input)
         $success_sent = true;
         require('templates/contact.php');
     }
-    else if (count($errors)) {
+    if (count($errors)) {
         $error_sent = true;
         require('templates/contact.php');
         return;

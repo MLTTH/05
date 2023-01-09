@@ -38,8 +38,8 @@ Une erreur s'est produite. Veuillez réessayer.
       </div>
 
    <div>
-      <label for="content">Texte</label><br />
-      <textarea class="form-control" id="content" placeholder="Tapez votre article" name="content"></textarea>
+      <label for="content">Contenu</label><br />
+      <textarea class="form-control" id="content" placeholder="Votre article doit faire 100 caractères au minimum..." name="content"></textarea>
       <?php if (isset($errors['content'])){ ?>
       <div class="error"><?php echo $errors['content']; ?></div>
       <?php } ?>

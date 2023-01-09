@@ -27,7 +27,6 @@
       <?php if (isset($errors['firstname'])){ ?>
       <div class="error"><?php echo $errors['firstname']; ?></div>
       <?php } ?>
-    
   </div>
 
   <div class="form-group">

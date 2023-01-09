@@ -38,7 +38,7 @@ class AddPostController
             $errors['author'] = 'ce champ est obligatoire';
         }
         
-        if ((strlen($input['content'])) < 50) {
+        if ((empty($input['author'])) || ((strlen($input['content']))) < 100) {
             $errors['content'] = 'Un article doit contenir au minimum 100 caractères';
         } 
         

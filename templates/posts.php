@@ -3,7 +3,7 @@
 <?php ob_start(); ?>
 <?php require('nav.php') ?>
 
-<h1>Articles</h1>
+<h1>Découvrez tous nos articles</h1>
 
 <?php
 foreach ($posts as $post) {
