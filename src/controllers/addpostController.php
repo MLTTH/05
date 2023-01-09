@@ -33,12 +33,17 @@ class AddPostController
         if (empty($input['author'])){
             $errors['author'] = 'ce champ est obligatoire';
         }
-    
+        
+        if ((strlen($input['content'])) < 50) {
+            $errors['content'] = 'Un article doit contenir au minimum 100 caractères';
+        } 
+        
         if (empty($input['content'])){
             $errors['content'] = 'ce champ est obligatoire';
         }
         
         if (count($errors)) {
+            $error_sent = true;
             require('templates/add_post.php');
             return;
         }

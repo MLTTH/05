@@ -13,9 +13,12 @@ class ContactController
 public function execute (array $input)
 {
     global $error_sent;
+    global $success_sent;
     global $errors;
     $error_sent = false; 
+    $success_sent = false;
     $errors = [];
+
     if (!isset($input['button'])) {
         require('templates/contact.php');
         return;
@@ -37,7 +40,12 @@ public function execute (array $input)
         $errors['content'] = 'ce champ est obligatoire';
     }
     
-    if (count($errors)) {
+    if (!count($errors)) {
+        $success_sent = true;
+        require('templates/contact.php');
+    }
+    else if (count($errors)) {
+        $error_sent = true;
         require('templates/contact.php');
         return;
     }
@@ -49,12 +57,9 @@ public function execute (array $input)
     $from = $input['email'];
     $subject = "sujet";
     //$message = "Bonjour " . $input["firstname"] . $input["lastname"];
-    $message =  $input["firstname"] . $input["lastname"] . "vous a laissé le message suivant : " .$input["content"];
+    $message =  "Bonjour !". $input["firstname"] . $input["lastname"] . " vous a laissé le message suivant : " . $input["content"];
     $success = mail($from, $subject,  $message);
-    if ($success) {
-        header('Location: index.php');
-    } 
-    $error_sent = true;
-    require('templates/contact.php');
+    return $success;
+
 }
 }

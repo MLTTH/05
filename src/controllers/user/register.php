@@ -29,14 +29,17 @@ class RegisterController{
         if (empty($input['lastname'])){
         $errors['lastname'] = 'ce champ est obligatoire';
     }
+
+        if (empty($input['email'])){
+        $errors['email'] = 'ce champ est obligatoire';
+        }
         $input['email'] = filter_var($input['email'], FILTER_VALIDATE_EMAIL);
-        if (!empty($input['email'])){
+        if (!empty($input['email'])){   
         $userexistant = $userRepository->getUserbyEmail($input['email']);
         if  ($userexistant){
-          $errors['email'] = 'email déjà utilisé';
+        $errors['email'] = 'Cet email est déjà utilisé';
         }
-    } else {
-        $errors['email'] = 'ce champ est obligatoire';
+
     }
         if ((!empty($input['password'])) && (strlen($input['password']) >= 8)) {
         $input['password'] = password_hash($input['password'], PASSWORD_DEFAULT);
@@ -46,6 +49,7 @@ class RegisterController{
         (!preg_match("/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{8,12}$/", $input['password']))) {
           $errors['password'] = 'Le mot de passe doit contenir au moins une majuscule, un chiffre et un caractère spécial';
     } if (count($errors)) {
+        $error_sent = true;
         require('templates/register.php');
         return;
     }
@@ -58,7 +62,7 @@ class RegisterController{
         require('templates/register.php');
     } else {
         /**TODO: changer header*/
-        header('Location: index.php');
+        header('Location: index.php?action=login');
     }
 }
 }

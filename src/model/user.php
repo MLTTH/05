@@ -18,6 +18,24 @@ class User
 class UserRepository
 {
     public DatabaseConnection $connection;
+    public function checkPassword(string $email, string $password) {
+        $query = $this->connection->getConnection()->prepare( "SELECT * FROM users WHERE email = :email AND password = :password" );
+        $query->execute(
+            array(  
+            'email'     =>     $email,  
+            'password'  =>     $password  
+        )
+        );
+        $count = $query->rowCount();
+        if($count > 0) {
+           //return true;
+           
+            $_SESSION["email"] = $email;
+            $_SESSION['password'] = $password;  
+            return true;
+        }
+
+    }
 
     public function getUserbyEmail($email): ?User
     {
@@ -57,21 +75,4 @@ class UserRepository
         return false;
         }
     }
-
-//     public function login(string $email, string $password) 
-// {
-//     $query = $this->connection->getConnection()->prepare( "SELECT * FROM users WHERE email = :email AND password = :password" );
-//     $query->execute([$email, $password]);
-//     // $count = $query->rowCount();  
-//     // if($count > 0)  
-// //    {  
-// //         $_SESSION["email"] = [$email];  
-// //         header("location:index.php?action=resgister");  
-// //    }  
-// //    else  
-// //    {  
-// //     header("location:index.php?action=login");
-// //    }
-// return;
-// }
 }

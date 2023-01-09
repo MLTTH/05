@@ -55,7 +55,8 @@ try {
         } elseif ($_GET['action'] === 'register') {
             (new RegisterController())->execute($_POST);
 		}  elseif ($_GET['action'] === 'login') {
-            //var_dump($_POST); die();
+            (new LoginController())->execute($_POST);
+        } elseif ($_GET['action'] === 'loginsuccess') {
             (new LoginController())->execute($_POST);
         } elseif ($_GET['action'] === 'posts') {
             (new postsController())->execute();

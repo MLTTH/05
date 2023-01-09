@@ -8,20 +8,17 @@
 <?php
 foreach ($posts as $post) {
 ?>
-    <div class="news">
 
-
-
-    
-        <h3>
+<div class="container">
+    <div class="jumbotron mb-1 py-2">
+        <h5 class="display-5">
             <?= htmlspecialchars($post->title); ?><br>
-        </h3>
-        <p>publié le <?= $post->frenchCreationDate; ?></p>
-        <p>
-            <?= nl2br(htmlspecialchars($post->content)); ?>
-            <br />
+        </h5>
+        <p class="card-text">publié le <?= $post->frenchCreationDate; ?> par <?= $post->author; ?></p>
+        <div class="text-white font-weight-bold">
             <em><a href="index.php?action=post&id=<?= urlencode($post->postIdentifier) ?>">Lire l'article</a></em>
-        </p>
+        </div>
+    </div>
     </div>
 <?php
 }
@@ -31,6 +28,8 @@ foreach ($posts as $post) {
 <a href="index.php?action=addpost"> 
     <button class="btn btn-lg btn-primary fw-bold border-white bg-dark" name="button" type="button">Ajouter un article</button> </a>
 </div>
+
 <?php $content = ob_get_clean(); ?>
 
 <?php require('layout.php') ?>
+<?php require('footer.php') ?>

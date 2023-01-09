@@ -7,31 +7,64 @@ require_once('src/model/user.php');
 use App\Lib\Database\DatabaseConnection;
 use App\Model\User\UserRepository;
 class LoginController{
-
-
-public function execute ($input)
+    
+    public function execute ($input)
 {
-
+    $loginRepository = new UserRepository();
+    $loginRepository->connection = new DatabaseConnection();
     global $error_sent;
     global $errors; 
     $error_sent = false; 
     $errors = [];
+    $_SESSION = [];
 
     if (empty($input['button'])) {
         require('templates/login.php');
         return;
     }
 
+    if ((empty($input['email'])) || (empty($input['password']))){
+        $errors['email']='ce champ est obligatoire';
+        $errors['password']='ce champ est obligatoire';
+    } 
+
     // 01 - Vérifier les champs, remplir tabl erreur si besoin
     // Si err afficher le template avec les err génériques, Sortir 
+    
+    // if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) //si j'ai un email
 
-    if (empty($input['email'])) {
-        $errors['email'] = 'ce champ est obligatoire';
+    $input['email'] = filter_var($input['email'], FILTER_VALIDATE_EMAIL); // tu me vérifies que c'est bien un email    
+    if (!empty($input['email'])){
+        //puisque c'est bien un email, si email pas vide
+        $userexistant = $loginRepository->getUserbyEmail($input['email']); // on vérifie qu'un user est bien en bdd
+        if  (!$userexistant){ // si je n'ai pas de user en bdd
+        $errors['email'] = 'Nous n\'avons pas trouvé d\'utilisateur lié à cet email'; //affiche erreur 
+        }
     } 
-       if (empty($input['password'])){
-        $errors['password'] = 'ce champ est obligatoire';
+
+    if (!empty($input['email']) || (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)))
+        {
+        $errors['email'] = 'Vous devez spécifier une adresse email valide';
+        }
+
+
+    if ((!empty($input['email'])) || (!empty($input['password']))) {
+        $checkPassword = $loginRepository->checkPassword($input['email'], $input['password']);
+        if ($checkPassword) {
+            $_SESSION = ($input['email']);
+            header('Location: index.php?action=loginsuccess');
+            require('templates/loginSuccess.php');
+        }
     }
 
+
+    if (count($errors)) {
+        $error_sent = true;
+        require('templates/login.php');
+        return;
+    }
+}
+}
     // 02 - Si tout est ok : 
     // Controller cherche en bdd "user" à partir de son email
     // Si user non trouvé, 
@@ -44,30 +77,3 @@ public function execute ($input)
     // pass pas ok => erreur sur formulaire
 
     // else => logout => fin session
-
-
-
-
-
-
-    // if(!empty($input["email"]) || !empty($input["password"])) 
-    //  {  
-    //      header('Location: index.php?action=contact');
-    //  }  
-    //  else {
-    //      header('Location: index.php?action=register');
-    //      require('templates/login.php');
-    //      return;
-    //  }
-
-
-    $loginRepository = new UserRepository();
-    $loginRepository->connection = new DatabaseConnection();
-    $success = $loginRepository->getUserbyEmail($input['email']);
-    if (!$success) {
-         require('templates/login.php');
-     } else {
-        header('Location: index.php');
-     }
-}
-}

@@ -3,7 +3,9 @@
 <?php ob_start(); ?>
 <h1>Le blog des Dev</h1>
 <?php if ($error_sent){ ?>
-  <p class="error">Le message n'a pu être envoyé. Une erreur s'est produite.</p>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+ Une erreur s'est produite. Veuillez réessayer.
+</div>
 <?php } ?>
 <p><a href="index.php?action=post&id=<?= $comment->post ?>">Retour à l'article</a></p>
 
@@ -32,3 +34,4 @@
 <?php $content = ob_get_clean(); ?>
 
 <?php require('layout.php') ?>
+<?php require('footer.php') ?>

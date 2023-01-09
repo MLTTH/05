@@ -2,12 +2,23 @@
 
 <?php require('nav.php') ?>
 
-<h1>Contact form</h1>
+<h1>Formulaire de contact</h1>
 
 <div class="container">
 <?php if ($error_sent){ ?>
-  <p class="error">Le message n'a pu être envoyé. Une erreur s'est produite.</p>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Le formulaire n'a pu être envoyé</strong> Veuillez réessayer.
+</div>
 <?php } ?>
+
+<?php if ($success_sent){ ?>
+  <div class="alert alert-success" role="alert">
+  Votre message a bien été envoyé.
+</div>
+<?php } ?>
+
+
+
 
 <form action="index.php?action=contact" method="post">
   <div class="form-group">
@@ -29,7 +40,7 @@
 
   <div class="form-group">
     <label for="exampleFormControlInput1">Votre email</label>
-    <input name="email" type="text" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" >
+    <input name="email" type="text" class="form-control" id="exampleFormControlInput1" placeholder="nom@exemple.com" >
     <?php if (isset($errors['email'])){ ?>
     <div class="error"><?php echo $errors['email']; ?></div>
     <?php } ?>
@@ -50,3 +61,4 @@
 
 <?php $content = ob_get_clean(); ?>
 <?php require('layout.php') ?>
+<?php require('footer.php') ?>
