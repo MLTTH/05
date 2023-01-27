@@ -6,6 +6,7 @@ require_once('src/controllers/homepageController.php');
 require_once('src/controllers/postController.php');
 require_once('src/controllers/user/register.php');
 require_once('src/controllers/user/login.php');
+require_once('src/controllers/user/logout.php');
 require_once('src/controllers/postsController.php');
 require_once('src/controllers/addpostController.php');
 require_once('src/controllers/front/contactController.php');
@@ -16,11 +17,24 @@ use App\Controllers\Comment\UpdateComment;
 use App\Controllers\HomepageController\HomepageController;
 use App\Controllers\PostController\PostController;
 use App\Controllers\User\LoginController;
+use App\Controllers\User\LogoutController;
 use App\Controllers\User\RegisterController;
 use App\Controllers\postsController\PostsController;
 use App\Controllers\Front\ContactController\ContactController;
 use App\Controllers\AddPostController\AddPostController;
 
+session_start();  
+//var_dump($_SESSION);
+global $emailConnecte;
+$emailConnecte = null;
+if (isset($_SESSION['email'])) {
+    $emailConnecte = $_SESSION['email'];
+    //die($emailConnecte);
+}
+// echo password_hash("rasmuslerdorf", PASSWORD_DEFAULT);
+// echo password_hash("rasmuslerdorf", PASSWORD_DEFAULT);
+// echo password_hash("rasmuslerdorf", PASSWORD_DEFAULT);
+//die;
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
         if ($_GET['action'] === 'post') {
@@ -56,8 +70,8 @@ try {
             (new RegisterController())->execute($_POST);
 		}  elseif ($_GET['action'] === 'login') {
             (new LoginController())->execute($_POST);
-        } elseif ($_GET['action'] === 'loginsuccess') {
-            (new LoginController())->execute($_POST);
+        } elseif ($_GET['action'] === 'logout') {
+            (new LogoutController())->execute();
         } elseif ($_GET['action'] === 'posts') {
             (new postsController())->execute();
         } elseif ($_GET['action'] === 'contact') {

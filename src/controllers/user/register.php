@@ -42,7 +42,7 @@ class RegisterController{
 
     }
         if ((!empty($input['password'])) && (strlen($input['password']) >= 8)) {
-        $input['password'] = password_hash($input['password'], PASSWORD_DEFAULT);
+        $passcripte = password_hash($input['password'], PASSWORD_DEFAULT);
     } else if (empty($input['password'])) {
         $errors['password'] = 'ce champ est obligatoire';
     } else if ((!empty($input['password'])) && (strlen($input['password']) < 8) && 
@@ -57,7 +57,7 @@ class RegisterController{
 
 
 
-    $success = $userRepository->createUser($input['firstname'], $input['lastname'], $input['email'], $input['password']);
+    $success = $userRepository->createUser($input['firstname'], $input['lastname'], $input['email'], $passcripte);
     if (!$success) {
         require('templates/register.php');
     } else {

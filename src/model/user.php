@@ -19,6 +19,7 @@ class UserRepository
 {
     public DatabaseConnection $connection;
     public function checkPassword(string $email, string $password) {
+        //die($password);
         $query = $this->connection->getConnection()->prepare( "SELECT * FROM users WHERE email = :email AND password = :password" );
         $query->execute(
             array(  
@@ -28,14 +29,15 @@ class UserRepository
         );
         $count = $query->rowCount();
         if($count > 0) {
-           //return true;
-           
-            $_SESSION["email"] = $email;
-            $_SESSION['password'] = $password;  
-            return true;
-        }
+        return true;
+        
+
+        // if ($email == $password) {
+        //     return true;
+        // };
 
     }
+}
 
     public function getUserbyEmail($email): ?User
     {
@@ -57,6 +59,20 @@ class UserRepository
     $user->password = $row['password'];
 
     return $user;
+    }
+
+    public function getUserbyEmailPassword($email, $password): ?User
+    {
+    $user = $this->getUserbyEmail($email); 
+    if (empty($user)) {
+        return null;
+    }
+    $passOk = password_verify($password, $user->password);
+
+    if ($passOk) {
+        return $user;
+    } 
+    return null;
     }
 
     public function createUser(string $firstname, string $lastname, string $email, string $password): bool

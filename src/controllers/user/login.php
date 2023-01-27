@@ -1,4 +1,4 @@
-<?php
+<?php  
 namespace App\Controllers\User;
 
 require_once('src/lib/database.php');
@@ -10,13 +10,19 @@ class LoginController{
     
     public function execute ($input)
 {
-    $loginRepository = new UserRepository();
-    $loginRepository->connection = new DatabaseConnection();
+    $userRepository = new UserRepository();
+    $userRepository->connection = new DatabaseConnection();
     global $error_sent;
     global $errors; 
     $error_sent = false; 
     $errors = [];
     $_SESSION = [];
+    global $emailConnecte;
+
+    if (!empty($emailConnecte)) {
+        header('Location: index.php');
+        return;
+    }
 
     if (empty($input['button'])) {
         require('templates/login.php');
@@ -36,31 +42,35 @@ class LoginController{
     $input['email'] = filter_var($input['email'], FILTER_VALIDATE_EMAIL); // tu me vérifies que c'est bien un email    
     if (!empty($input['email'])){
         //puisque c'est bien un email, si email pas vide
-        $userexistant = $loginRepository->getUserbyEmail($input['email']); // on vérifie qu'un user est bien en bdd
+        $userexistant = $userRepository->getUserbyEmail($input['email']); // on vérifie qu'un user est bien en bdd
         if  (!$userexistant){ // si je n'ai pas de user en bdd
         $errors['email'] = 'Nous n\'avons pas trouvé d\'utilisateur lié à cet email'; //affiche erreur 
         }
     } 
 
-    if (!empty($input['email']) || (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)))
+    if (!empty($input['email']) && (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)))
         {
         $errors['email'] = 'Vous devez spécifier une adresse email valide';
         }
 
 
-    if ((!empty($input['email'])) || (!empty($input['password']))) {
-        $checkPassword = $loginRepository->checkPassword($input['email'], $input['password']);
-        if ($checkPassword) {
-            $_SESSION = ($input['email']);
-            header('Location: index.php?action=loginsuccess');
-            require('templates/loginSuccess.php');
-        }
-    }
-
+        if ((!empty($input['email'])) && (!empty($input['password']))) {
+            $user= $userRepository->getUserbyEmailPassword($input['email'], $input['password']);
+            if ($user) {
+                 $_SESSION['email'] = ($input['email']);
+             }
+             else {
+               $errors['email'] = 'Pb d\'authentification';
+             }
+       
+     }
 
     if (count($errors)) {
         $error_sent = true;
         require('templates/login.php');
+    }
+    else {
+        header('Location: index.php');
     }
 }
 }

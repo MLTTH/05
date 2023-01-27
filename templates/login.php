@@ -7,8 +7,6 @@
 </div>
 <?php } ?>
 
-<?php session_start(); ?>
-
 <section class="navbar navbar-dark bg-dark d-flex justify-content-center" style="height: 100vh";">
 
   <div class="row d-flex justify-content-center align-items-center h-100">
