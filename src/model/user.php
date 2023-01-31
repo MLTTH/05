@@ -30,12 +30,6 @@ class UserRepository
         $count = $query->rowCount();
         if($count > 0) {
         return true;
-        
-
-        // if ($email == $password) {
-        //     return true;
-        // };
-
     }
 }
 

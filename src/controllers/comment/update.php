@@ -12,21 +12,24 @@ class UpdateComment
 {
     public function execute(string $postIdentifier, ?array $input)
     {
-        // global $error_sent;
-        // global $errors; 
-        // $error_sent = false; 
-        // $errors = [];
+        global $error_sent;
+        global $errors; 
+        $error_sent = false; 
+        $errors = [];
+        global $emailConnecte;
 
-        // if (empty($input['button'])) {
-        //     require('templates/update_comment.php');
-        //     return;
-        // } 
+
+         if (empty($input['button'])) {
+             require('templates/update_comment.php');
+             return;
+         } 
          if (empty($input['author'])){
              $errors['author'] = 'ce champ est obligatoire';
          }  if (empty($input['comment'])){
              $errors['comment'] = 'ce champ est obligatoire';
          }
          if (count($errors)) {
+            $error_sent = true;
              require('templates/update_comment.php');
              return;
           if ($input !== null) {
@@ -36,7 +39,7 @@ class UpdateComment
                   $author = $input['author'];
                   $comment = $input['comment'];
               } else {
-                  throw new \Exception('Les données du formulaire sont invalides.');
+                header('Location: index.php?action=posts');
               }
             }
 
@@ -65,7 +68,6 @@ class UpdateComment
             } else {
                 header('Location: index.php?action=post&id=' .  $post);
                 die;
-                //header('Location: index.php?action=updateComment&id=' . $postIdentifier);
             }
         }
 

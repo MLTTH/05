@@ -35,6 +35,7 @@ class PostRepository
         $post->postIdentifier = $row['id'];
         $post->author = $row['author'];
 
+
         return $post;
     }
 
@@ -67,4 +68,14 @@ class PostRepository
         $affectedLines = $statement->execute([$title, $subtitle, $author, $content]);
         return ($affectedLines > 0);
     } 
+
+    public function updatePost(string $title, string $subtitle, string $author, string $content): bool
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            'UPDATE posts SET title = ?, subtitle = ?, author = ?, content = ? WHERE id = ?'
+        );
+        $affectedLines = $statement->execute([$title, $subtitle, $author, $content]);
+
+        return ($affectedLines > 0);
+    }
 }

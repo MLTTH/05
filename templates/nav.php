@@ -16,26 +16,45 @@
           <li class="nav-item">
             <a class="nav-link" href="index.php?action=posts">Tous les articles</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.php?action=addpost">Ajouter un article</a>
-          </li>
         </ul>
 
-
+        
         <div class="form-inline my-2 my-lg-0">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-          <?php if ($emailConnecte!=null){ ?>
-         <a class="nav-link" ><?php echo $emailConnecte; ?> </a>
-         <?php } else {?> 
-            <a class="nav-link"  href="index.php?action=login">Se connecter</a>
-          <?php } ?>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.php?action=register">S'enregistrer</a>
-          </li>
-        </ul>
+          <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+              
+              <?php if ($emailConnecte!=null){ ?>
+                <li class="nav-item">
+                <a class="nav-link" href="index.php?action=addpost">Ajouter un article</a>
+                </li>
+                <a class="nav-link" ><?php echo 'Bonjour ' . $emailConnecte; ?> </a>
+                <?php } else {?> 
+                <a class="nav-link"  href="index.php?action=login">Se connecter</a>
+                <li class="nav-item">
+                <a class="nav-link" href="index.php?action=register" >S'enregistrer</a>
+                </li>
+                <?php } ?>
+      
+              
+
+                <?php if( isset($_SESSION['email']) && !empty($_SESSION['email']) )
+                {
+                ?>
+                  <li class="nav-item">
+                    <a class="nav-link" href="index.php?action=logout">Déconnexion</a>
+                  </li>
+              <?php }else{ 
+                ?>
+              <?php } ?>
+
+              
+            </li>
+          </ul>
         </div>
+                    
+        
+        
       </div>
     </nav>
 <?php $content = ob_get_clean(); ?>

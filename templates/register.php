@@ -7,10 +7,10 @@
 </div>
 <?php } ?>
 
-<section class="navbar navbar-dark bg-dark mh-100 d-flex justify-content-center">
+<section class="navbar navbar-dark bg-dark mh-100 d-flex justify-content-center py-5">
   
 
-  <div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="row d-flex justify-content-center align-items-center h-100 ">
   <div>
   <h1 class="text-light">Créer un compte</h1>
   </div>

@@ -29,12 +29,8 @@ global $emailConnecte;
 $emailConnecte = null;
 if (isset($_SESSION['email'])) {
     $emailConnecte = $_SESSION['email'];
-    //die($emailConnecte);
 }
-// echo password_hash("rasmuslerdorf", PASSWORD_DEFAULT);
-// echo password_hash("rasmuslerdorf", PASSWORD_DEFAULT);
-// echo password_hash("rasmuslerdorf", PASSWORD_DEFAULT);
-//die;
+
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
         if ($_GET['action'] === 'post') {

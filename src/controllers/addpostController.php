@@ -19,6 +19,7 @@ class AddPostController
         global $errors;
         $error_sent = false; 
         $errors = [];
+        global $emailConnecte;
 
 
         if (empty($input['button'])) {

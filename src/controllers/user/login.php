@@ -74,15 +74,3 @@ class LoginController{
     }
 }
 }
-    // 02 - Si tout est ok : 
-    // Controller cherche en bdd "user" à partir de son email
-    // Si user non trouvé, 
-    // message générique login, pass incorrect, retour page login
-
-    // 03 - si user toruvé : 
-    // verifier le password
-    // appeler verifier password sur l'objet user 
-    // pass ok => user en session
-    // pass pas ok => erreur sur formulaire
-
-    // else => logout => fin session    

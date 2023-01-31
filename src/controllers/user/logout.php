@@ -6,6 +6,6 @@ class LogoutController{
     public function execute ()
 {  
     session_destroy();  
-    header("location:index.php?action=login");  
+    header("location:index.php");  
 }
 }

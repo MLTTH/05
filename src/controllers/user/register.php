@@ -17,6 +17,7 @@ class RegisterController{
         $errors = [];
         $userRepository = new UserRepository();
         $userRepository->connection = new DatabaseConnection();
+        global $emailConnecte;
         
     if (empty($input['button'])) {
         require('templates/register.php');

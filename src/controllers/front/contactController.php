@@ -18,6 +18,7 @@ public function execute (array $input)
     $error_sent = false; 
     $success_sent = false;
     $errors = [];
+    global $emailConnecte;
 
     if (!isset($input['button'])) {
         require('templates/contact.php');

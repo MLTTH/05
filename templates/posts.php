@@ -9,7 +9,7 @@
 foreach ($posts as $post) {
 ?>
 
-<div class="container">
+<div class="container pt-4">
     <div class="jumbotron mb-1 py-2">
         <h5 class="display-5">
             <?= htmlspecialchars($post->title); ?><br>
@@ -27,10 +27,13 @@ foreach ($posts as $post) {
 }
 ?>
 
-<div class="d-flex justify-content-center">
-<a href="index.php?action=addpost"> 
-    <button class="btn btn-lg btn-primary fw-bold border-white bg-dark" name="button" type="button">Ajouter un article</button> </a>
-</div>
+<?php if ($emailConnecte!=null){ ?>
+    <div class="d-flex justify-content-center">
+        <a href="index.php?action=addpost"> 
+        <button class="btn btn-lg btn-primary fw-bold border-white bg-dark" name="button" type="button">Ajouter un article</button> </a>
+    </div>
+<?php } ?>
+
 
 <?php $content = ob_get_clean(); ?>
 

@@ -4,7 +4,7 @@
 
 <h1>Formulaire de contact</h1>
 
-<div class="container">
+<div class="container pt-4">
 <?php if ($error_sent){ ?>
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
   <strong>Le formulaire n'a pu être envoyé</strong> Veuillez réessayer.
