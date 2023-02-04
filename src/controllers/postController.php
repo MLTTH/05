@@ -28,7 +28,6 @@ class PostController
         $commentRepository = new CommentRepository();
         $commentRepository->connection = $connection;
         $comments = $commentRepository->getComments($postIdentifier);
-        var_dump($comments);
 
         require('templates/post.php');
     }

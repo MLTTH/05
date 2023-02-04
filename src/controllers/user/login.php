@@ -58,6 +58,8 @@ class LoginController{
             $user= $userRepository->getUserbyEmailPassword($input['email'], $input['password']);
             if ($user) {
                  $_SESSION['email'] = ($input['email']);
+                 $_SESSION['firstname'] = ($user->firstname);
+                 $_SESSION['admin'] = ($user->admin);
              }
              else {
                $errors['email'] = 'Pb d\'authentification';

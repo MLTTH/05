@@ -46,15 +46,30 @@
   <div class="col-sm-6">
 
     <?php
+//visitor & user
+  // var_dump($_SESSION);
+if ((!isset($_SESSION['admin'])) || (($_SESSION['admin'] == 0))) {
+  foreach ($comments as $comment) {
+      if ($comment->status == 'PUBLISHED') {
+
+        ?>
+        <p><strong><?= htmlspecialchars($comment->author) ?>
+        </strong> le <?= $comment->frenchCreationDate ?></p>
+        <p><?= nl2br(htmlspecialchars($comment->comment)) ?></p>
+      <?php
+      }
+  }
+}
+//admin is logged in
+  if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
     foreach ($comments as $comment) {
-    if ($comment->status == 'PUBLISHED') {
-      
-      ?>
-      <p><strong><?= htmlspecialchars($comment->author) ?>
-    </strong> le <?= $comment->frenchCreationDate ?> (<a href="index.php?action=updateComment&id=<?= $comment->postIdentifier ?>">modifier</a>)</p>
-    <p><?= nl2br(htmlspecialchars($comment->comment)) ?></p>
-    <?php
-    }
+        ?>
+        <p><strong><?= htmlspecialchars($comment->author) ?>
+        </strong> le <?= $comment->frenchCreationDate ?> (<a href="index.php?action=updateComment&id=<?= $comment->postIdentifier ?>">modifier</a>)</p>
+        <p><?= nl2br(htmlspecialchars($comment->comment)) ?></p>
+      <?php
+  
+  }
   }
     ?>
   </div>

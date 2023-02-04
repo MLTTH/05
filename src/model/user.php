@@ -13,6 +13,7 @@ class User
     public string $lastname;
     public string $email;
     public string $password;
+    public string $admin;
 }
 
 class UserRepository
@@ -37,7 +38,7 @@ class UserRepository
     public function getUserbyEmail($email): ?User
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, firstname, lastname, email, password FROM users WHERE email=?"
+            "SELECT id, firstname, lastname, email, admin, password FROM users WHERE email=?"
         );
         $statement->execute([$email]);
 
@@ -51,6 +52,7 @@ class UserRepository
         $user->firstname = $row['firstname'];
         $user->lastname = $row['lastname'];
         $user->email = $row['email'];
+        $user->admin = $row['admin'];
         $user->password = $row['password'];
 
         return $user;

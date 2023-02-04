@@ -28,7 +28,7 @@
         <li class="nav-item">
           <a class="nav-link" href="index.php?action=addpost">Ajouter un article</a>
         </li>
-        <a class="nav-link"><?php echo 'Bonjour ' . $emailConnecte; ?> </a>
+        <a class="nav-link"><?php echo 'Bonjour ' . ($_SESSION['firstname']);?> </a>
       <?php } else { ?>
         <a class="nav-link" href="index.php?action=login">Se connecter</a>
         <li class="nav-item">
