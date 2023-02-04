@@ -13,50 +13,35 @@ class UpdateComment
     public function execute(string $postIdentifier, ?array $input)
     {
         global $error_sent;
-        global $errors; 
-        $error_sent = false; 
+        global $errors;
+        $error_sent = false;
         $errors = [];
         global $emailConnecte;
 
 
-         if (empty($input['button'])) {
-             require('templates/update_comment.php');
-             return;
-         } 
-         if (empty($input['author'])){
-             $errors['author'] = 'ce champ est obligatoire';
-         }  if (empty($input['comment'])){
-             $errors['comment'] = 'ce champ est obligatoire';
-         }
-         if (count($errors)) {
+        if (empty($input['button'])) {
+            require('templates/update_comment.php');
+            return;
+        }
+        if (empty($input['author'])) {
+            $errors['author'] = 'ce champ est obligatoire';
+        }
+        if (empty($input['comment'])) {
+            $errors['comment'] = 'ce champ est obligatoire';
+        }
+        if (count($errors)) {
             $error_sent = true;
-             require('templates/update_comment.php');
-             return;
-          if ($input !== null) {
-              $author = null;
-              $comment = null;
-              if (!empty($input['author']) && !empty($input['comment'])) {
-                  $author = $input['author'];
-                  $comment = $input['comment'];
-              } else {
-                header('Location: index.php?action=posts');
-              }
-            }
-
-        // if ($input !== null) {
-        //     $author = null;
-        //     $comment = null;
-        //     if (!empty($input['author']) && !empty($input['comment'])) {
-        //         $author = $input['author'];
-        //         $comment = $input['comment'];
-        //     } else if (empty($input['author'])) {
-        //             $errors['author'] = 'ce champ est obligatoire';
-        //     } else if (empty($input['comment'])) {
-        //             $errors['comment'] = 'ce champ est obligatoire';
-        //     } if (count($errors)) {
-        //         require('templates/update_comment.php');
-        //         return;
-        //     }
+            require('templates/update_comment.php');
+            return;
+            if ($input !== null) {
+                $author = null;
+                $comment = null;
+                if (!empty($input['author']) && !empty($input['comment'])) {
+                    $author = $input['author'];
+                    $comment = $input['comment'];
+                } else {
+                    header('Location: index.php?action=posts');
+                }
 
 
             $commentRepository = new CommentRepository();
@@ -69,8 +54,10 @@ class UpdateComment
                 header('Location: index.php?action=post&id=' .  $post);
                 die;
             }
+            require('templates/update_comment.php');
+            return;
         }
-
-        require('templates/update_comment.php');
+        }
     }
+
 }

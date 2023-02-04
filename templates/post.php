@@ -9,55 +9,59 @@
 
 
 <div class="news">
-    <p>
-        <em>publié le <?= $post->frenchCreationDate ?> par <?= $post->author ?></em>
-    </p>
+  <p>
+    <em>publié le <?= $post->frenchCreationDate ?> par <?= $post->author ?></em>
+  </p>
 
-    <p>
-        <?= nl2br(htmlspecialchars($post->content)) ?>
-    </p>
+  <p>
+    <?= nl2br(htmlspecialchars($post->content)) ?>
+  </p>
 </div>
 
 
 <div class="row">
   <div class="col-sm-6 text-center">
-  <h2>Commentaires</h2>
+    <h2>Commentaires</h2>
     <form action="index.php?action=addComment&id=<?= $post->postIdentifier ?>" method="post">
-   <div>
+      <div>
         <label for="author">Auteur</label><br />
         <input type="text" id="author" name="author" />
-        <?php if (isset($errors['author'])){ ?>
-        <div class="error"><?php echo $errors['author']; ?></div>
+        <?php if (isset($errors['author'])) { ?>
+          <div class="error"><?php echo $errors['author']; ?></div>
         <?php } ?>
-   </div>
-   <div>
-      <label for="comment">Commentaire</label><br />
-      <textarea id="comment" name="comment"></textarea>
-      <?php if (isset($errors['comment'])){ ?>
-        <div class="error"><?php echo $errors['comment']; ?></div>
+      </div>
+      <div>
+        <label for="comment">Commentaire</label><br />
+        <textarea id="comment" name="comment"></textarea>
+        <?php if (isset($errors['comment'])) { ?>
+          <div class="error"><?php echo $errors['comment']; ?></div>
         <?php } ?>
-   </div>
-   <div >
-      <input type="submit" class="btn btn-lg btn-primary fw-bold border-white bg-dark role="button">
-   </div>
+      </div>
+      <div>
+        <input type="submit" class="btn btn-lg btn-primary fw-bold border-white bg-dark role=" button">
+      </div>
     </form>
-    </div>
+  </div>
 
-    <div class="col-sm-6">
+  <div class="col-sm-6">
 
-      <?php
-foreach ($comments as $comment) {
-  ?>
-    <p><strong><?= htmlspecialchars($comment->author) ?></strong> le <?= $comment->frenchCreationDate ?> (<a href="index.php?action=updateComment&id=<?= $comment->postIdentifier ?>">modifier</a>)</p>
+    <?php
+    foreach ($comments as $comment) {
+    if ($comment->status == 'PUBLISHED') {
+      
+      ?>
+      <p><strong><?= htmlspecialchars($comment->author) ?>
+    </strong> le <?= $comment->frenchCreationDate ?> (<a href="index.php?action=updateComment&id=<?= $comment->postIdentifier ?>">modifier</a>)</p>
     <p><?= nl2br(htmlspecialchars($comment->comment)) ?></p>
     <?php
-}
-?>
-</div>
+    }
+  }
+    ?>
+  </div>
 </div>
 
 <p class="container">
-   <a href="index.php?action=posts">Retour</a>
+  <a href="index.php?action=posts">Retour</a>
 </p>
 
 <?php $content = ob_get_clean(); ?>

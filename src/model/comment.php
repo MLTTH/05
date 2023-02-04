@@ -6,6 +6,7 @@ require_once('src/lib/database.php');
 
 use App\Lib\Database\DatabaseConnection;
 
+//  Créer mon objet 'comment'
 class Comment
 {
     public string $postIdentifier;
@@ -13,17 +14,18 @@ class Comment
     public string $frenchCreationDate;
     public string $comment;
     public string $post;
+    public string $status;
 }
 
 class CommentRepository
 {
     public DatabaseConnection $connection;
-
     //afficher les commentaires
     public function getComments(string $post): array
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y') AS french_creation_date, post_id FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
+            "SELECT id, author, comment, status, DATE_FORMAT(comment_date, '%d/%m/%Y') AS french_creation_date, post_id 
+            FROM comments WHERE post_id = ? ORDER BY comment_date DESC"
         );
         $statement->execute([$post]);
 
@@ -34,6 +36,7 @@ class CommentRepository
             $comment->author = $row['author'];
             $comment->frenchCreationDate = $row['french_creation_date'];
             $comment->comment = $row['comment'];
+            $comment->status = $row['status'];
             $comment->post = $row['post_id'];
 
             $comments[] = $comment;
@@ -45,7 +48,7 @@ class CommentRepository
     public function getComment(string $postIdentifier): ?Comment
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, author, comment, DATE_FORMAT(comment_date, '%d/%m/%Y') AS french_creation_date, post_id FROM comments WHERE id = ?"
+            "SELECT id, author, comment, status, DATE_FORMAT(comment_date, '%d/%m/%Y') AS french_creation_date, post_id FROM comments WHERE id = ?"
         );
         $statement->execute([$postIdentifier]);
 
@@ -79,6 +82,16 @@ class CommentRepository
     {
         $statement = $this->connection->getConnection()->prepare(
             'UPDATE comments SET author = ?, comment = ? WHERE id = ?'
+        );
+        $affectedLines = $statement->execute([$author, $comment, $postIdentifier]);
+        
+        return ($affectedLines > 0);
+    }
+
+    public function deleteComment(string $postIdentifier, string $author, string $comment): bool
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            'DELETE comments SET author = ?, comment = ? WHERE id = ?'
         );
         $affectedLines = $statement->execute([$author, $comment, $postIdentifier]);
 

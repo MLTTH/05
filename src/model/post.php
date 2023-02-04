@@ -22,7 +22,8 @@ class PostRepository
     public function getPost(string $postIdentifier): Post
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT id, title, subtitle, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date FROM posts WHERE id = ?"
+            "SELECT id, title, subtitle, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date 
+            FROM posts WHERE id = ?"
         );
         $statement->execute([$postIdentifier]);
 
@@ -67,7 +68,7 @@ class PostRepository
         );
         $affectedLines = $statement->execute([$title, $subtitle, $author, $content]);
         return ($affectedLines > 0);
-    } 
+    }
 
     public function updatePost(string $title, string $subtitle, string $author, string $content): bool
     {
