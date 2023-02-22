@@ -15,6 +15,9 @@ class AddCommentController
         $author = null;
         $comment = null;
         global $emailConnecte;
+        
+        $commentRepository = new CommentRepository();
+        $commentRepository->connection = new DatabaseConnection();
         // everyone can add a comment
         if (!empty($input['author']) && !empty($input['comment'])) {
             $author = $input['author'];
@@ -22,8 +25,19 @@ class AddCommentController
             header('Location: index.php?action=post&id=' . $post);
         }
 
-        $commentRepository = new CommentRepository();
-        $commentRepository->connection = new DatabaseConnection();
+        //validate a post as an admin
+        if (isset($_POST['validate'])) { 
+          $postId = $_POST['validate'];
+            $result = $commentRepository->validateComment(37);
+          
+            if ($result) {
+              echo "Post validated successfully!";
+            } else {
+              echo "Failed to validate post.";
+            }
+          }
+
+    
         $success = $commentRepository->createComment($post, $author, $comment);
         if (!$success) {
             header('Location: index.php?action=post&id=' . $post);

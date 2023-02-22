@@ -34,11 +34,6 @@ class LoginController{
         $errors['password']='ce champ est obligatoire';
     } 
 
-    // 01 - Vérifier les champs, remplir tabl erreur si besoin
-    // Si err afficher le template avec les err génériques, Sortir 
-    
-    // if (!filter_var($input['email'], FILTER_VALIDATE_EMAIL)) //si j'ai un email
-
     $input['email'] = filter_var($input['email'], FILTER_VALIDATE_EMAIL); // tu me vérifies que c'est bien un email    
     if (!empty($input['email'])){
         //puisque c'est bien un email, si email pas vide
@@ -57,7 +52,7 @@ class LoginController{
         if ((!empty($input['email'])) && (!empty($input['password']))) {
             $user= $userRepository->getUserbyEmailPassword($input['email'], $input['password']);
             if ($user) {
-                 $_SESSION['email'] = ($input['email']);
+                 $_SESSION['email'] = ($user->email);
                  $_SESSION['firstname'] = ($user->firstname);
                  $_SESSION['admin'] = ($user->admin);
              }

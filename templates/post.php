@@ -64,11 +64,12 @@ if ((!isset($_SESSION['admin'])) || (($_SESSION['admin'] == 0))) {
   if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
     foreach ($comments as $comment) {
         ?>
-        <p><strong><?= htmlspecialchars($comment->author) ?>
-        </strong> le <?= $comment->frenchCreationDate ?> (<a href="index.php?action=updateComment&id=<?= $comment->postIdentifier ?>">modifier</a>)</p>
+        <p><span><?php echo ($comment->status);?></span> <strong><?= htmlspecialchars($comment->author)?>
+        
+        </strong> le <?= $comment->frenchCreationDate ?> 
+        <a href="index.php?action=validateComment&id=<?= $comment->postIdentifier ?>&postId=<?= $post->postIdentifier ?>">Valider</a>
         <p><?= nl2br(htmlspecialchars($comment->comment)) ?></p>
       <?php
-  
   }
   }
     ?>

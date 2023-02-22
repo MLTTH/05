@@ -25,6 +25,12 @@ class PostRepository
             "SELECT id, title, subtitle, content, author, DATE_FORMAT(creation_date, '%d/%m/%Y') AS french_creation_date 
             FROM posts WHERE id = ?"
         );
+
+        // "SELECT posts.id, posts.title, posts.subtitle, posts.content, users.username, DATE_FORMAT(posts.creation_date, '%d/%m/%Y') AS french_creation_date
+        // FROM posts
+        // INNER JOIN users ON posts.author = users.user_id
+        // WHERE id = ?"
+        // );
         $statement->execute([$postIdentifier]);
 
         $row = $statement->fetch();
@@ -61,14 +67,16 @@ class PostRepository
         return $posts;
     }
 
-    public function createPost(string $title, string $subtitle, string $author, string $content): bool
-    {
-        $statement = $this->connection->getConnection()->prepare(
-            'INSERT INTO posts( title, subtitle, author, content, creation_date) VALUES( ?, ?, ?, ?, NOW())'
-        );
-        $affectedLines = $statement->execute([$title, $subtitle, $author, $content]);
-        return ($affectedLines > 0);
-    }
+     public function createPost(string $title, string $subtitle, string $author, string $content): bool
+     {
+         $statement = $this->connection->getConnection()->prepare(
+             'INSERT INTO posts( title, subtitle, author, content, creation_date) VALUES( ?, ?, ?, ?, NOW())'
+         );
+         $affectedLines = $statement->execute([$title, $subtitle, $author, $content]);
+         return ($affectedLines > 0);
+     }
+
+
 
     public function updatePost(string $title, string $subtitle, string $author, string $content): bool
     {

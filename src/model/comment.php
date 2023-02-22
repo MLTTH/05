@@ -63,10 +63,13 @@ class CommentRepository
         $comment->author = $row['author'];
         $comment->frenchCreationDate = $row['french_creation_date'];
         $comment->comment = $row['comment'];
+        $comment->status = $row['status'];
         $comment->post = $row['post_id'];
 
         return $comment;
     }
+
+    //STATUS
 
     public function createComment(string $post, string $author, string $comment): bool
     {
@@ -85,6 +88,20 @@ class CommentRepository
         );
         $affectedLines = $statement->execute([$author, $comment, $postIdentifier]);
         
+        return ($affectedLines > 0);
+    }
+
+    public function validateComment(string $postIdentifier): bool
+    {
+        $sql = "UPDATE comments SET status='PUBLISHED' WHERE id= ? AND status='PENDING'";
+        //var_dump($sql);
+        //die;
+        $statement = $this->connection->getConnection()->prepare($sql
+            //'UPDATE comments SET author = ?, comment = ? WHERE id = ?'
+        );
+        $affectedLines = $statement->execute([$postIdentifier]);
+        //var_dump($affectedLines);
+        //die;
         return ($affectedLines > 0);
     }
 

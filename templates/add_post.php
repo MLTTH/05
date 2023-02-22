@@ -15,20 +15,33 @@
 
 
    <form action="index.php?action=addpost" method="post">
-      <div class="form-group container">
+      <div class="form-group container mt-5">
          <div>
-            <label for="author">Auteur</label><br />
+
+
+
+
+<label for="author">AuteurBis</label><br />
+<input class="form-control" type="text" id="author" name="author" placeholder="Votre prénom" />
+<?php if ($emailConnecte) { ?>
+   <label for="author" value=<?php $emailConnecte;?><?php echo $emailConnecte; ?></label><br />
+<?php } ?>
+
+
+
+         <label for="author">Auteur</label><br />
             <input class="form-control" type="text" id="author" name="author" placeholder="Votre prénom" />
             <?php if (isset($errors['author'])) { ?>
                <div class="error"><?php echo $errors['author']; ?></div>
             <?php } ?>
+  
 
             <label for="title">Titre</label><br />
             <input class="form-control" type="text" id="title" name="title" placeholder="Entrez un titre" />
             <?php if (isset($errors['title'])) { ?>
                <div class="error"><?php echo $errors['title']; ?></div>
             <?php } ?>
-
+N
 
             <label for="subtitle">Chapô</label><br />
             <input class="form-control" type="text" id="subtitle" name="subtitle" placeholder="Entrez un sous titre" />
