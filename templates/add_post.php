@@ -18,22 +18,10 @@
       <div class="form-group container mt-5">
          <div>
 
+         <p>
+         <?php echo 'Bonjour ' . ($_SESSION['firstname']);?> 
+         </p>
 
-
-
-<label for="author">AuteurBis</label><br />
-<input class="form-control" type="text" id="author" name="author" placeholder="Votre prénom" />
-<?php if ($emailConnecte) { ?>
-   <label for="author" value=<?php $emailConnecte;?><?php echo $emailConnecte; ?></label><br />
-<?php } ?>
-
-
-
-         <label for="author">Auteur</label><br />
-            <input class="form-control" type="text" id="author" name="author" placeholder="Votre prénom" />
-            <?php if (isset($errors['author'])) { ?>
-               <div class="error"><?php echo $errors['author']; ?></div>
-            <?php } ?>
   
 
             <label for="title">Titre</label><br />

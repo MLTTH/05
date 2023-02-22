@@ -61,14 +61,15 @@ if ((!isset($_SESSION['admin'])) || (($_SESSION['admin'] == 0))) {
   }
 }
 //admin is logged in
-  if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
-    foreach ($comments as $comment) {
-        ?>
-        <p><span><?php echo ($comment->status);?></span> <strong><?= htmlspecialchars($comment->author)?>
-        
+$isAdmin = (isset($_SESSION['admin']) && $_SESSION['admin'] == 1);
+foreach ($comments as $comment) {
+  if ($isAdmin) {
+      ?>
+      <a href="index.php?action=validateComment&id=<?= $comment->postIdentifier ?>&postId=<?= $post->postIdentifier ?>">Valider</a>
+        <p><strong><?= htmlspecialchars($comment->author)?>
         </strong> le <?= $comment->frenchCreationDate ?> 
-        <a href="index.php?action=validateComment&id=<?= $comment->postIdentifier ?>&postId=<?= $post->postIdentifier ?>">Valider</a>
         <p><?= nl2br(htmlspecialchars($comment->comment)) ?></p>
+        <p><?php echo 'status :' . ($comment->status);?></p> 
       <?php
   }
   }

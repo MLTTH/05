@@ -39,13 +39,13 @@ class AddPostController
             $errors['subtitle'] = 'ce champ est obligatoire';
         }
     
-        if (empty($input['author'])){
-            $errors['author'] = 'ce champ est obligatoire';
-        }
+        // if (empty($input['author'])){
+        //     $errors['author'] = 'ce champ est obligatoire';
+        // }
         
-        if ((empty($input['author'])) || ((strlen($input['content']))) < 100) {
-            $errors['content'] = 'Un article doit contenir au minimum 100 caractères';
-        } 
+        // if ((empty($input['author'])) || ((strlen($input['content']))) < 100) {
+        //     $errors['content'] = 'Un article doit contenir au minimum 100 caractères';
+        // } 
         
         if (empty($input['content'])){
             $errors['content'] = 'ce champ est obligatoire';
@@ -61,7 +61,8 @@ class AddPostController
     
         $addpostRepository = new PostRepository();
         $addpostRepository->connection = new DatabaseConnection();
-        $success = $addpostRepository->createPost($input['title'], $input['subtitle'], $input['author'], $input['content']);
+        $success = $addpostRepository->createPost($input['title'], $input['subtitle'], $_SESSION['firstname'], $input['content']);
+
         if (!$success) {
             header('Location: index.php?action=addpost');
         } else {
