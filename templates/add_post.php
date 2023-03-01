@@ -29,7 +29,6 @@
             <?php if (isset($errors['title'])) { ?>
                <div class="error"><?php echo $errors['title']; ?></div>
             <?php } ?>
-N
 
             <label for="subtitle">Chapô</label><br />
             <input class="form-control" type="text" id="subtitle" name="subtitle" placeholder="Entrez un sous titre" />

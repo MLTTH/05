@@ -25,10 +25,16 @@ class AddCommentController
             header('Location: index.php?action=post&id=' . $post);
         }
 
+        if (($emailConnecte) && !empty($input['comment'])) {
+          $author = $_SESSION['firstname'];
+          $comment = $input['comment'];
+          header('Location: index.php?action=post&id=' . $post);
+        }
+
         //validate a post as an admin
         if (isset($_POST['validate'])) { 
           $postId = $_POST['validate'];
-            $result = $commentRepository->validateComment(37);
+          $result = $commentRepository->validateComment($postId);
           
             if ($result) {
               echo "Post validated successfully!";

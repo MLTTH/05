@@ -25,7 +25,6 @@ class UpdateComment
 
         $commentRepository = new CommentRepository();
         $commentRepository->connection = new DatabaseConnection();
-        var_dump($commentRepository);
         $success = $commentRepository->validateComment($postIdentifier);
         if ($success) {
         header('Location: index.php?action=post&id=' . $postId);
