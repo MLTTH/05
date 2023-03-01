@@ -15,7 +15,7 @@ class HomepageController
         $postRepository = new PostRepository();
         $postRepository->connection = new DatabaseConnection();
         $posts = $postRepository->getPosts();
-
+        global $emailConnecte;
         require('templates/homepage.php');
     }
 }

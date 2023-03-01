@@ -12,6 +12,7 @@ class PostsController
 {
     public function execute()
     {
+        global $emailConnecte;
         $postRepository = new PostRepository();
         $postRepository->connection = new DatabaseConnection();
         $posts = $postRepository->getPosts();
